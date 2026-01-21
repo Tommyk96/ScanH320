@@ -1647,7 +1647,7 @@ namespace BoxAgr
 
 
                     //верификация кода короба для номеров не SSCC18
-                    if (Job.boxQueue.Peek() is BoxWithLayers cBox && cBox?.Number == indata)
+                    if (Job.boxQueue.Count > 0 && Job.boxQueue.Peek() is BoxWithLayers cBox && cBox?.Number == indata)
                         HandScannerMode = HandScannerMode.VerifyBox;
 
 
@@ -1837,7 +1837,7 @@ namespace BoxAgr
             //проверить может это номер короба?
             if (ld.SerialShippingContainerCode00 != null)
             {
-                string msg = Job.GetBoxInfo(ld.SerialShippingContainerCode00);
+                string msg = Job.GetBoxInfo(fullNumber);
 
                 systemState.StatusText = msg;
                 systemState.StatusBackground = Brushes.Transparent;
@@ -3980,43 +3980,63 @@ GTIN:                          {Job.GTIN}
         {
             try
             {
+                //определить тип номера. короб или продукт
                 GsLabelData ld = new Util.GsLabelData(indata);
-                string result = Job.VerifyProductNum(ld);
-                if (!string.IsNullOrEmpty(result))// != "")
+                if (!string.IsNullOrEmpty(ld.SerialNumber))
                 {
+                    string result = Job.VerifyProductNum(ld);
+                    if (!string.IsNullOrEmpty(result))// != "")
+                    {
 
-                    systemState.StatusText = $"Продукт не соответствует заданию! {result}";
-                    systemState.StatusBackground = Brushes.DarkOrange;
-                    return false;
+                        systemState.StatusText = $"Продукт не соответствует заданию! {result}";
+                        systemState.StatusBackground = Brushes.DarkOrange;
+                        return false;
+                    }
+
+                    //проверить в текущей коробке
+                    var r = Job.IsAlreadyInCurrentBoxes(boxAssembly, ld.SerialNumber);
+                    string boxNum = r.boxNum;
+                    if (r.IsExist)
+
+                        //проверить в уже верифицированных номерах
+                        Job.IsAlreadyInProcessedBox(indata, out boxNum);
+
+                    if (string.IsNullOrEmpty(boxNum))
+                    {
+                        systemState.StatusText = $"Номер: {indata} не найден в выпущенных коробах!\nПечать не возможна!";
+                        systemState.StatusBackground = Brushes.DarkOrange;
+                        return false;
+                    }
+                    PartAggSrvBoxNumber? b = Job.readyBoxes.FirstOrDefault(x => x._boxNumber.Equals(boxNum, StringComparison.Ordinal));
+
+                    if (b == null)
+                    {
+                        systemState.StatusText = $"Номер: {boxNum} не найден в выпущенных коробах!\nПечать не возможна!";
+                        systemState.StatusBackground = Brushes.DarkOrange;
+                        return false;
+                    }
+                    BoxWithLayers cBox = new BoxWithLayers(b.boxNumber, Job.numLayersInBox, Job.numРacksInBox);
+                    foreach (string s in b.productNumbers)
+                        cBox.Numbers.Add(new Unit() { Barcode = s });
+
+                    CreateLabelAndPrint(cBox, Job, this);
                 }
-
-                //проверить в текущей коробке
-                var r = Job.IsAlreadyInCurrentBoxes(boxAssembly, ld.SerialNumber);
-                string boxNum = r.boxNum;
-                if (r.IsExist)
-
-                    //проверить в уже верифицированных номерах
-                    Job.IsAlreadyInProcessedBox(indata, out boxNum);
-
-                if (string.IsNullOrEmpty(boxNum))
+                else if (!string.IsNullOrEmpty(ld.SerialShippingContainerCode00))
                 {
-                    systemState.StatusText = $"Номер: {indata} не найден в выпущенных коробах!\nПечать не возможна!";
-                    systemState.StatusBackground = Brushes.DarkOrange;
-                    return false;
-                }
-                PartAggSrvBoxNumber? b = Job.readyBoxes.FirstOrDefault(x => x._boxNumber.Equals(boxNum, StringComparison.Ordinal));
+                    PartAggSrvBoxNumber? b = Job.readyBoxes.FirstOrDefault(x => x._boxNumber.Equals(indata, StringComparison.Ordinal));
 
-                if (b == null)
-                {
-                    systemState.StatusText = $"Номер: {boxNum} не найден в выпущенных коробах!\nПечать не возможна!";
-                    systemState.StatusBackground = Brushes.DarkOrange;
-                    return false;
-                }
-                BoxWithLayers cBox = new BoxWithLayers(b.boxNumber,Job.numLayersInBox,Job.numРacksInBox);
-                foreach (string s in b.productNumbers)
-                    cBox.Numbers.Add(new Unit() { Barcode = s });
+                    if (b == null)
+                    {
+                        systemState.StatusText = $"Номер: {indata} не найден в выпущенных коробах!\nПечать не возможна!";
+                        systemState.StatusBackground = Brushes.DarkOrange;
+                        return false;
+                    }
+                    BoxWithLayers cBox = new BoxWithLayers(b.boxNumber, Job.numLayersInBox, Job.numРacksInBox);
+                    foreach (string s in b.productNumbers)
+                        cBox.Numbers.Add(new Unit() { Barcode = s });
 
-                CreateLabelAndPrint(cBox, Job, this);
+                    CreateLabelAndPrint(cBox, Job, this);
+                }
                 return true;
             }
             catch (Exception ex)
