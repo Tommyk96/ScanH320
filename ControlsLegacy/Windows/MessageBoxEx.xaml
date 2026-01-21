@@ -1,0 +1,28 @@
+﻿<Window x:Class="PharmaLegacy.Windows.MessageBoxEx"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PharmaLegacy.Windows"
+        mc:Ignorable="d"
+        Title="ApplyWindow"  Width="700"  WindowStyle="None" MouseDown="Window_MouseDown" Background="#FF1F1F1F" Height="220"
+        MaxWidth="1000" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Border BorderBrush="Black" BorderThickness="1,1,1,1" >
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="163*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" Foreground="White" FontWeight="Bold" FontSize="24" Margin="20,10,20,20" TextWrapping="Wrap" HorizontalAlignment="Center" Text="{Binding MessageText}"/>
+            <StackPanel Margin="10,0,10,10" Grid.Row="1" x:Name="Pane1"/>
+            <StackPanel x:Name="BtnPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,10,10">
+                <Button  x:Name="Yes"     Click="Yes_Click"       Content="Да"  FontSize="24" Height="86" VerticalAlignment="Bottom" Margin="10,0,0,0" HorizontalAlignment="Right" Width="200" Style="{DynamicResource ActionButtonStyle3}"  />
+                <Button  x:Name="No"     Click="No_Click"        Content="Нет"  FontSize="24" Height="86" VerticalAlignment="Bottom" Margin="10,0,0,0" HorizontalAlignment="Right" Width="200" Style="{DynamicResource ActionButtonStyle3}"  />
+                <Button  x:Name="Cancel"  Click="CloseApp_Click"  Content="Отменить"  FontSize="24" Height="86" VerticalAlignment="Bottom" Margin="10,0,0,0"  HorizontalAlignment="Right" Width="200" Style="{DynamicResource ActionButtonStyle3}"/>
+                <Button   x:Name="LastBox" Click="LastBox_Click"  Content="Последний короб"  FontSize="24" Height="86" VerticalAlignment="Bottom" Margin="10,0,0,0"  HorizontalAlignment="Right" Width="230" Style="{DynamicResource ActionButtonStyle3}"/>
+                <Button   x:Name="DbgMode" Click="DbgMode_Click"  Content="Dbg1"  FontSize="24" Height="86" VerticalAlignment="Bottom" Margin="10,0,0,0"  HorizontalAlignment="Right" Width="100" Background="Red" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

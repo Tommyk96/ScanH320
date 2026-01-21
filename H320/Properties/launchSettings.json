@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BoxAgr": {
+      "commandName": "Project",
+      "commandLineArgs": "-dbg -noTop -noPrint"
+    }
+  }
+}

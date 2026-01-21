@@ -1,0 +1,436 @@
+﻿<Page x:Class="BoxAgr.Pages.MainPageLuninec"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BoxAgr.Pages"
+      xmlns:conv="clr-namespace:BoxAgr.ViewConverters"
+       xmlns:System="clr-namespace:System;assembly=mscorlib" 
+      mc:Ignorable="d" 
+      Title="MainPageLuninec" MinHeight="690" MinWidth="1000" >
+    <!--Background="#F1373737">-->
+
+    <Page.Resources>
+        <System:Double x:Key="TextFontSize">24</System:Double>
+        <System:Double x:Key="DescrTextFontSize">20</System:Double>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
+
+    <Viewbox>
+        <Grid Height="690" Width="1000">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="81"/>
+                <RowDefinition Height="570*"/>
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Column="4"  Height="1" Width="1" >
+                <Canvas x:Name="ImageView" Width="1" Height="1"  Background="#FFB3B3B3"/>
+            </Viewbox>
+
+            <StackPanel Grid.Row="0"  Height="80" VerticalAlignment="Top" Orientation="Horizontal" Background="{Binding Path=StatusBackground}" Margin="5,3,2,3">
+                <Viewbox MaxHeight="78"  Stretch="Uniform">
+                    <TextBlock  x:Name="tbStatusText1" Foreground="White" MinHeight="78" Width="910" Margin="5,2,5,5"  TextWrapping="WrapWithOverflow" Text="{Binding Path=StatusText}" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center" />
+                </Viewbox>
+                <StackPanel Width="150">
+                    <Viewbox Height="50" Width="60" Margin="0,0,0,5" Visibility="{Binding RightBoxAwaiVerifyVisiblility}">
+                        <Canvas  Height="245" Width="245">
+                            <Path Fill="#FFFFFF" Data="M112.959,48.944c1.499,0,3.036-0.595,4.182-1.768l20.334-20.873c2.252-2.3,2.192-5.991-0.108-8.237
+			c-2.332-2.258-6.031-2.22-8.249,0.104l-20.352,20.875c-2.254,2.3-2.188,5.987,0.112,8.233
+			C110.032,48.395,111.477,48.944,112.959,48.944z"/>
+                            <Path Fill="#FFFFFF" Data="M88.568,46.026c0.032,0,0.062,0,0.092,0c3.22-0.05,5.78-2.695,5.747-5.907l-0.369-29.132
+			c-0.06-3.224-2.725-5.708-5.917-5.763c-3.22,0.04-5.777,2.685-5.747,5.905l0.369,29.132
+			C82.795,43.458,85.372,46.026,88.568,46.026z"/>
+                            <Path Fill="#FFFFFF" Data="M61.43,52.156c1.138,1.116,2.591,1.663,4.067,1.663c1.515,0,3.02-0.593,4.182-1.768c2.254-2.3,2.192-5.987-0.11-8.233
+			l-20.864-20.34c-2.3-2.254-5.935-2.238-8.253,0.1c-2.234,2.3-2.188,5.991,0.126,8.237L61.43,52.156z"/>
+                            <Path Fill="#FFFFFF" Data="M243.483,93.542c-0.101-0.054-0.201,0.008-0.293-0.038c-0.817-1.349-2.107-2.411-3.771-2.733L90.106,61.607
+			c-1.102-0.229-2.128-0.126-3.125,0.258L6.223,91.603c-0.823,0.299-1.19,1.054-1.767,1.625c-0.808,0.21-1.685,0.07-2.331,0.6
+			C0.761,94.937,0,96.59,0,98.323v107.439c0,2.789,1.978,5.197,4.725,5.719l151.745,29.134c0.353,0.076,0.722,0.12,1.09,0.12
+			c0.112,0,0.196-0.093,0.276-0.093c0.129,0,0.229,0.093,0.337,0.093c0.657,0,1.318-0.12,1.976-0.337l81.948-29.13
+			c2.32-0.813,3.863-3.038,3.863-5.49V98.329C245.943,96.426,245.01,94.65,243.483,93.542z M89.454,73.369l131.315,25.655
+			l-19.58,6.953c-0.369-0.156-0.529-0.557-0.93-0.629L71.102,80.125L89.454,73.369z M157.483,121.506L26.81,96.426l23.227-8.552
+			l130.398,25.467L157.483,121.506z M151.709,227.827L11.625,200.949v-95.585l140.084,26.894V227.827z M234.298,201.654
+			l-70.286,24.999v-95.084l70.286-24.995V201.654z"/>
+
+                            <!-- <Path  Fill="#FFFFFF" Data="M4.663,275.789l259.424,92.301c0.758,0.27,1.549,0.406,2.353,0.406c1.455,0,2.854-0.443,4.048-1.285   c0.071-0.051,75.028-60.43,137.896-111.073c1.663-1.336,2.616-3.328,2.616-5.463l-0.004-110.87   c-0.003-0.357-0.031-0.705-0.083-1.037c-0.406-2.561-2.185-4.679-4.638-5.529L144.94,42.879c-2.181-0.754-4.698-0.352-6.528,1.039   L2.778,146.679C1.567,147.596,0,148.899,0,152.27v116.908C0,272.14,1.874,274.796,4.663,275.789z M21.72,149.931l36.524-27.673   l240.134,88.821l-31.274,23.696L21.72,149.931z M363.103,179.643l33.868-25.657v93.331L273.455,346.82v-99.255l32.374-24.528   l-0.028,38.011c0.004,2.668,1.59,5.067,3.979,6.261c2.321,1.16,5.267,0.895,7.335-0.652l43.243-32.29   c1.769-1.32,2.822-3.426,2.819-5.632L363.103,179.643z M319.905,247.06l-0.071-38.132c-0.005-2.917-1.847-5.556-4.582-6.566   L71.511,112.208l34.612-26.225l242.949,94.973l0.065,44.275L319.905,247.06z M119.239,76.045l24.657-18.682l245.384,84.844   l-34.304,25.989L119.239,76.045z M14.029,264.227V162.118l245.394,84.848v104.57L14.029,264.227z" Height="136" Stretch="Fill" Width="200" Canvas.Top="22"/>-->
+                        </Canvas>
+                    </Viewbox>
+                    <Viewbox Height="22" Width="150" Stretch="Uniform" >
+                        <TextBlock  Text="{Binding Path=LastCodeInLastBox}" Foreground="White" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="12" FontWeight="Bold" />
+                    </Viewbox>
+                </StackPanel>
+            </StackPanel>
+
+            <Grid x:Name="DataBlock" Grid.Row="1" Margin="0,0,0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="440"/>
+                    <RowDefinition Height="95"/>
+                </Grid.RowDefinitions>
+                <StackPanel  x:Name="InfoBlockEmpty" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" Height="30" Visibility="{Binding Path=InfoBlockEmptyVisiblility}">
+                    <TextBlock  Foreground="Gray" Cursor="" Margin="4,0,0,0"  Text="Задание отсутствует." FontSize="{DynamicResource TextFontSize}"/>
+                </StackPanel>
+                <StackPanel x:Name="InfoBlock" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" Height="30" Visibility="{Binding Path=InfoBlockVisiblility}">
+                    <TextBlock  Foreground="Gray" Cursor="" Margin="4,0,0,0"  Text="Продукт:" FontSize="{DynamicResource TextFontSize}"/>
+                    <TextBlock  x:Name="tbProduct" Foreground="White"  Width="380" Cursor="" Margin="5,0"  Text="{Binding Path=ProductName}"  FontSize="{DynamicResource TextFontSize}" FontWeight="Bold"/>
+                    <TextBlock  Foreground="Gray" Cursor="" Margin="5,0"  Text="GTIN:" FontSize="{DynamicResource TextFontSize}"/>
+                    <TextBlock  x:Name="tbGtin" Foreground="White" Cursor="" Margin="10,0"  Text="{Binding Path=GTIN}" FontSize="{DynamicResource TextFontSize}"  FontWeight="Bold"/>
+                    <TextBlock  Foreground="Gray" Cursor="" Margin="10,0"  Text="Партия:" FontSize="{DynamicResource TextFontSize}"/>
+                    <TextBlock  x:Name="tbSeri" Foreground="White" Cursor="" Margin="10,0"  Text="{Binding Path=PartNumber}" FontSize="{DynamicResource TextFontSize}"  FontWeight="Bold"/>
+                </StackPanel>
+                <TabControl Grid.Row="1" Grid.ColumnSpan="3" Background="Transparent" TabStripPlacement="Bottom" BorderThickness="0">
+                    <TabItem Header="Короба" Foreground="White" Style="{DynamicResource TabItemStyle1}" 
+                             FontSize="{DynamicResource TextFontSize}" BorderBrush="#FF282828" MinWidth="200" MinHeight="40">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="500"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Grid.Row="1">
+                                <ListView x:Name="lvNumber" Height="360"  Background="{x:Null}" Foreground="White" BorderBrush="#FF282828"
+                              ItemContainerStyle="{StaticResource ListViewItem2}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ListCurrentSerials}">
+                                    <ListView.View>
+                                        <GridView  ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle2}">
+                                            <GridViewColumn Width="243"  >
+                                                <GridViewColumnHeader Height="40" Foreground="Gray" FontSize="{DynamicResource TextFontSize}" IsEnabled="False">Серийные номера</GridViewColumnHeader>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox BorderThickness="0"  IsReadOnly="True" TextWrapping="Wrap"  
+                                                     Foreground="White" Background="Transparent"  FontSize="{DynamicResource DescrTextFontSize}" Text="{Binding Serial}" >
+                                                        </TextBox>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Horizontal">
+                                    <!--<TextBlock Text="Всего пачек:" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>-->
+                                    <TextBlock Text="{Binding SerialInBoxCounter}" Margin="5,0,0,0" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Grid Grid.Column="1"  Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="90"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="75"/>
+                                    <RowDefinition Height="90"/>
+
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+
+
+                                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                        <Canvas Name="svg9493" Width="50.000000" Height="50.000000">
+                                            <Canvas.Resources>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient7452" MappingMode="Absolute" StartPoint="23,44" EndPoint="23,43">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#00FFFFFF" Offset="0.0000000"/>
+                                                            <GradientStop Color="#DFFFFFFF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                    <LinearGradientBrush.Transform>
+                                                        <MatrixTransform Matrix="24.162375 0 0 18.685562 -538.24647 -790.03875"/>
+                                                    </LinearGradientBrush.Transform>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient7450" MappingMode="Absolute" StartPoint="23,43" EndPoint="23,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FF0F6900" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFA3FF87" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                    <LinearGradientBrush.Transform>
+                                                        <MatrixTransform Matrix="30.2835 0 0 30.2835 -680.90622 -1286.1606"/>
+                                                    </LinearGradientBrush.Transform>
+                                                </LinearGradientBrush>
+                                            </Canvas.Resources>
+                                            <!--Unknown tag: metadata-->
+                                            <!--Unknown tag: sodipodi:namedview-->
+                                            <Canvas Name="layer1">
+                                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path7428" Fill="{Binding LeftScanLampColor1}" StrokeThickness="0.80000001" StrokeMiterLimit="4" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                                    <Path.Data>
+                                                        <PathGeometry Figures="m 43.061972 24.999994 c 0 9.970206 -8.091751 18.061957 -18.061957 18.061957 -9.970207 0 -18.0619577 -8.091751 -18.0619577 -18.061957 0 -9.970207 8.0917507 -18.0619881 18.0619577 -18.0619881 9.970206 0 18.061957 8.0917811 18.061957 18.0619881 z" FillRule="NonZero"/>
+                                                    </Path.Data>
+                                                </Path>
+                                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path7430" Fill="{Binding LeftScanLampColor2}" StrokeThickness="0.80000001" StrokeMiterLimit="4" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                                    <Path.Data>
+                                                        <PathGeometry Figures="m 39.387917 18.975154 c 0 6.151829 -6.456187 11.144611 -14.411141 11.144611 -7.954955 0 -14.411141 -4.992782 -14.411141 -11.144611 0 -6.151829 6.456186 -11.1446295 14.411141 -11.1446295 7.954954 0 14.411141 4.9928005 14.411141 11.1446295 z" FillRule="NonZero"/>
+                                                    </Path.Data>
+                                                </Path>
+                                            </Canvas>
+                                        </Canvas>
+                                    </Viewbox>
+
+                                    <TextBlock Grid.Row="0" Text="Сканер" FontWeight="Bold" Foreground="White" Margin="20,0,20,0"
+                                               FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" 
+                                               HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Center"/>
+
+                                    <!--<Viewbox Height="50" Width="50" Margin="60,0,0,0" Visibility="Hidden">
+                                        <Canvas  Height="200" Width="200">
+                                            <Path  Fill="#FFFFFF" Data="M4.663,275.789l259.424,92.301c0.758,0.27,1.549,0.406,2.353,0.406c1.455,0,2.854-0.443,4.048-1.285   c0.071-0.051,75.028-60.43,137.896-111.073c1.663-1.336,2.616-3.328,2.616-5.463l-0.004-110.87   c-0.003-0.357-0.031-0.705-0.083-1.037c-0.406-2.561-2.185-4.679-4.638-5.529L144.94,42.879c-2.181-0.754-4.698-0.352-6.528,1.039   L2.778,146.679C1.567,147.596,0,148.899,0,152.27v116.908C0,272.14,1.874,274.796,4.663,275.789z M21.72,149.931l36.524-27.673   l240.134,88.821l-31.274,23.696L21.72,149.931z M363.103,179.643l33.868-25.657v93.331L273.455,346.82v-99.255l32.374-24.528   l-0.028,38.011c0.004,2.668,1.59,5.067,3.979,6.261c2.321,1.16,5.267,0.895,7.335-0.652l43.243-32.29   c1.769-1.32,2.822-3.426,2.819-5.632L363.103,179.643z M319.905,247.06l-0.071-38.132c-0.005-2.917-1.847-5.556-4.582-6.566   L71.511,112.208l34.612-26.225l242.949,94.973l0.065,44.275L319.905,247.06z M119.239,76.045l24.657-18.682l245.384,84.844   l-34.304,25.989L119.239,76.045z M14.029,264.227V162.118l245.394,84.848v104.57L14.029,264.227z" Height="136" Stretch="Fill" Width="200" Canvas.Top="22"/>
+                                        </Canvas>
+                                    </Viewbox>-->
+
+                                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Margin="0,0,0,0" Stretch="Uniform">
+                                        <Canvas Name="svg94932" Width="50.000000" Height="50.000000">
+                                            <Canvas.Resources>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient6650" MappingMode="Absolute" StartPoint="23,44" EndPoint="23,43">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#00FFFFFF" Offset="0.0000000"/>
+                                                            <GradientStop Color="#DFFFFFFF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                    <LinearGradientBrush.Transform>
+                                                        <MatrixTransform Matrix="24.162375 0 0 18.685562 -538.24645 -790.03875"/>
+                                                    </LinearGradientBrush.Transform>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient6494" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FFCF0000" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFFF8BA4" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient6648" MappingMode="Absolute" StartPoint="23,43" EndPoint="23,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FFCF0000" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFFF8BA4" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                    <LinearGradientBrush.Transform>
+                                                        <MatrixTransform Matrix="30.2835 0 0 30.2835 -680.9062 -1286.1606"/>
+                                                    </LinearGradientBrush.Transform>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient6506" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#00FFFFFF" Offset="0.0000000"/>
+                                                            <GradientStop Color="#DFFFFFFF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient7498" MappingMode="Absolute" StartPoint="23,44" EndPoint="23,43">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#00FFFFFF" Offset="0.0000000"/>
+                                                            <GradientStop Color="#DFFFFFFF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient7464" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FF00039A" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFAFA5FF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient7496" MappingMode="Absolute" StartPoint="23,43" EndPoint="23,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FF00039A" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFAFA5FF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient5756" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FF828282" Offset="0.0000000"/>
+                                                            <GradientStop Color="#5A929292" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient9321" MappingMode="Absolute" StartPoint="23,43" EndPoint="24,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FF828282" Offset="0.0000000"/>
+                                                            <GradientStop Color="#5A929292" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient5742" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FFADADAD" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFF0F0F0" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient7492" MappingMode="Absolute" StartPoint="23,42" EndPoint="23,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FFADADAD" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFF0F0F0" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient9527" MappingMode="Absolute" StartPoint="23,42" EndPoint="23,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FFADADAD" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFF0F0F0" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient9529" MappingMode="Absolute" StartPoint="23,43" EndPoint="24,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FF828282" Offset="0.0000000"/>
+                                                            <GradientStop Color="#5A929292" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient9531" MappingMode="Absolute" StartPoint="23,43" EndPoint="23,44">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#FF00039A" Offset="0.0000000"/>
+                                                            <GradientStop Color="#FFAFA5FF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                                <LinearGradientBrush xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Key="linearGradient9533" MappingMode="Absolute" StartPoint="23,44" EndPoint="23,43">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="#00FFFFFF" Offset="0.0000000"/>
+                                                            <GradientStop Color="#DFFFFFFF" Offset="1.0000000"/>
+                                                        </GradientStopCollection>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Canvas.Resources>
+                                            <!--Unknown tag: metadata-->
+                                            <!--Unknown tag: sodipodi:namedview-->
+                                            <Canvas Name="layer2">
+                                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path6600" Fill="{Binding RightScanLampColor1}" StrokeThickness="0.80000001" StrokeMiterLimit="4" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                                    <Path.Data>
+                                                        <PathGeometry Figures="m 43.061992 24.999994 c 0 9.970206 -8.091751 18.061957 -18.061957 18.061957 -9.970207 0 -18.0619578 -8.091751 -18.0619578 -18.061957 0 -9.970207 8.0917508 -18.0619881 18.0619578 -18.0619881 9.970206 0 18.061957 8.0917811 18.061957 18.0619881 z" FillRule="NonZero"/>
+                                                    </Path.Data>
+                                                </Path>
+                                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path6602" Fill="{Binding RightScanLampColor2}" StrokeThickness="0.80000001" StrokeMiterLimit="4" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                                    <Path.Data>
+                                                        <PathGeometry Figures="m 39.387937 18.975154 c 0 6.151829 -6.456187 11.144611 -14.411141 11.144611 -7.954955 0 -14.411141 -4.992782 -14.411141 -11.144611 0 -6.151829 6.456186 -11.1446295 14.411141 -11.1446295 7.954954 0 14.411141 4.9928005 14.411141 11.1446295 z" FillRule="NonZero"/>
+                                                    </Path.Data>
+                                                </Path>
+                                            </Canvas>
+                                        </Canvas>
+                                    </Viewbox>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock Grid.Row="0"   Foreground="White" Margin="50,0,0,0" Width="180"
+                                               FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" 
+                                               HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Path=LeftStatus, Mode=OneWay}"/>
+                                    <TextBlock Grid.Row="0" Text="{Binding Path=RightStatus, Mode=OneWay}"  Foreground="White" Margin="30,0,0,0" Width="170"
+                                               FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" 
+                                               HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ToggleButton x:Name="btnLeft"  Click="btnLeft_Click"  IsEnabled="{Binding LeftScanEnable}" HorizontalAlignment="Right" Width="190" Margin="0,0,15,0" Height="80" FontSize="24" VerticalAlignment="Bottom"   Content="Авто" Style="{DynamicResource ActionToggleButtonStyle3}" />
+                                    <ToggleButton x:Name="btnRight"   Click="btnRight_Click" IsEnabled="{Binding RightScanEnable}"  HorizontalAlignment="Right" Width="190" Margin="0,0,15,0" Height="80" FontSize="24" VerticalAlignment="Bottom"   Content="Ручной" Style="{DynamicResource ActionToggleButtonStyle3}"/>
+                                    <!--<Button x:Name="btnGenManScan" Width="50" Height="40" Content="Gen" 
+                                            Click="btnGenManScan_Click" 
+                                            Visibility="{Binding Path=IsChecked, Mode=OneWay, ElementName=btnRight,
+                                        Converter={StaticResource BoolToVisibilityConverter}}"/>-->
+                                </StackPanel>
+                                <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ToggleButton x:Name="btnStart"  Click="btnStart_Click"   HorizontalAlignment="Right" Width="190"
+                              Margin="0,0,10,0" Height="80" FontSize="24" VerticalAlignment="Bottom" IsChecked="{Binding StopLineInverce}" 
+                              Content="Старт" Style="{DynamicResource ActionToggleButtonStart}"/>
+                                    <!--<Button x:Name="btnStart"  Click="btnStart_Click"  HorizontalAlignment="Right" Width="190" Margin="0,0,15,0" Height="80" FontSize="24" VerticalAlignment="Bottom"   Content="Старт" Style="{DynamicResource ActionButtonStyle3}" TouchDown="btnStart_TouchDown" TouchUp="btnStart_TouchUp"/>-->
+                                    <ToggleButton x:Name="btnStop"  Click="btnStop_Click"  HorizontalAlignment="Right" Width="190" Margin="0,0,15,0" Height="80" FontSize="24" VerticalAlignment="Bottom" IsChecked="{Binding StopLine}"  Content="Стоп" Style="{DynamicResource ActionToggleButtonStyle3}"/>
+                                </StackPanel>
+                            </Grid>
+                            <StackPanel Grid.Column="2"  Grid.Row="1">
+                                <ListView x:Name="lvBox" Height="360"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" Foreground="White" BorderBrush="#FF282828"  ItemContainerStyle="{StaticResource ListViewItem2}" ItemsSource="{Binding ProcessedBoxes}" >
+                                    <ListView.View>
+                                        <GridView  ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle2}">
+                                            <GridViewColumn Width="243"  >
+                                                <GridViewColumnHeader Height="40" Foreground="Gray" FontSize="{DynamicResource TextFontSize}" IsEnabled="False">Номера коробов</GridViewColumnHeader>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox BorderThickness="0"  IsReadOnly="True" TextWrapping="Wrap"  
+                                                     Foreground="White" Background="Transparent" FontSize="{DynamicResource DescrTextFontSize}" Text="{Binding Serial, Mode=OneWay}" >
+                                                        </TextBox>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <StackPanel Orientation="Horizontal">
+                                    <!--<TextBlock Text="Обработано кор.:" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>-->
+                                    <TextBlock Text="{Binding BoxCounter}" Margin="5,0,0,0" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <!--Панель палет-->
+                    <TabItem Header="Палеты" Foreground="White" Style="{DynamicResource TabItemStyle1}"
+                             FontSize="{DynamicResource TextFontSize}" BorderBrush="#FF282828"  MinWidth="200" MinHeight="40">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel   Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Height="30">
+                                <TextBlock  Foreground="Gray" Cursor="" Margin="4,0,0,0"  Text="Сформировано палет: "
+                                            FontSize="{DynamicResource TextFontSize}" VerticalAlignment="Center"/>
+                                <!--{Binding Path=ReadyPalleteCount}-->
+                                <TextBlock  Foreground="White" Cursor="" Margin="4,0,0,0"  Text="{Binding Path=ReadyPalleteCount, Mode=OneWay}" 
+                                            FontSize="{DynamicResource TextFontSize}" VerticalAlignment="Center"/>
+
+
+                            </StackPanel>
+
+                            <StackPanel  x:Name="palletlInfo" Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Height="30">
+                                <TextBlock  Foreground="Gray" Cursor="" Margin="4,0,0,0"  Text="Коробов ожидающих формирование в палету: "
+                                            FontSize="{DynamicResource TextFontSize}" VerticalAlignment="Center"/>
+                                <!--{Binding Path=BoxNotInPallete}-->
+                                <TextBlock  Foreground="White" Cursor="" Margin="4,0,0,0"  Text="{Binding Path=BoxNotInPallete, Mode=OneWay}" 
+                                            FontSize="{DynamicResource TextFontSize}" VerticalAlignment="Center"/>
+
+
+                            </StackPanel>
+
+
+                            <Button x:Name="btnCreatePallete" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"  Click="btnCreatePallete_Click"  HorizontalAlignment="Right" Width="280" 
+                                        Margin="20,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Сформировать палету"
+                                        Style="{DynamicResource ActionButtonStyle3}"/>
+                            <Button x:Name="btnReprintPallete" Grid.Column="1" Grid.Row="3"  Click="btnReprintPallete_Click"  HorizontalAlignment="Right" Width="280" 
+                                        Margin="20,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Перепечатать этикетку"
+                                        Style="{DynamicResource ActionButtonStyle3}"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="3" Orientation="Horizontal" Height="100">
+                    <Button x:Name="btnClear"  Click="btnClear_Click"  HorizontalAlignment="Right" Width="190" Margin="0,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Удалить короб" Style="{DynamicResource ActionButtonStyle3}"/>
+                    <Button x:Name="btnBrack"  Click="btnBack_Click"  HorizontalAlignment="Right" Width="190" Margin="0,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Брак" Style="{DynamicResource ActionButtonStyle3}"/>
+                    <Button x:Name="btnHelp"  Click="btnHelp_Click"  HorizontalAlignment="Right" Width="190" Margin="0,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Справка" Style="{DynamicResource ActionButtonStyle3}"/>
+                    <Button x:Name="btnCLoseBox"  Click="btnCLoseBox_Click"  HorizontalAlignment="Right" Width="190" Margin="0,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Закрыть короб" Style="{DynamicResource ActionButtonStyle3}"/>
+
+                    <Button x:Name="btnReprint"  Click="btnReprint_Click" HorizontalAlignment="Right" Width="190" Margin="0,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Перепечатать" Style="{DynamicResource ActionButtonStyle3}"/>
+                    <!-- <Button x:Name="btnSample"  Click="btnSample_Click"  HorizontalAlignment="Right" Width="190" Margin="0,0,10,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Образец" Style="{DynamicResource ActionButtonStyle3}"/>-->
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Page>

@@ -1,0 +1,32 @@
+﻿namespace BoxAgr.BLL.Models
+{
+    public enum BoxStates
+    {
+        Uncknow,
+        LogicError,
+        Defected,
+        DefectedManual,
+        ProductsInBoxVerify,
+        DefectedMarckScaned,
+        BoxAwaitVerify,
+        NoRead,
+        BoxVerify,
+        BoxPackedInPallet,
+        RepeatProductNum,
+        ProductWrongGtin,
+        ProductNumIsNotGS1,
+        RepeatBoxMark,
+        RepeatBoxNum,
+        MarckNumberIsEmpty,
+        BoxNumberIsEmpty,
+        ProductNumberIsEmpty,
+        ProductNotFound,
+        BoxNotFound,
+        NumberVerify,
+        BoxInVerifyPallet,
+        MarckNotFound,
+        PcChekTimeout,
+        DbError,
+        NoData
+    }
+}

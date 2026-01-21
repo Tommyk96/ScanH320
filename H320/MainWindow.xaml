@@ -1,0 +1,597 @@
+﻿<Window x:Class="BoxAgr.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoxAgr"
+        mc:Ignorable="d"
+         Title="Window1" MinHeight="768" Width="1024" Height="768" MinWidth="1024" WindowStartupLocation="CenterScreen" WindowStyle="None"
+                        Background="#FF1F1F1F" MouseDown="Window_MouseDown"  KeyUp="MainWindow1_KeyUp" Deactivated="MainWindow1_Deactivated"  Loaded="MainWindow1_Loaded" >
+
+    <Window.Resources>
+        <Style x:Key="ActionButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#373737" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="0" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Path x:Name="PathIcon" Width="0" Height="25" Stretch="Fill" Fill="#4C87B3" HorizontalAlignment="Left" Margin="17,0,0,0" Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "/>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E59400" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter TargetName="PathIcon" Property="Fill" Value="Black" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="OrangeRed" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SettingsTabItemStyle1" TargetType="{x:Type TabItem}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="3,3,3,1" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="6,1"/>
+            <Setter Property="BorderBrush" Value="#FF8C8E94"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                        <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid SnapsToDevicePixels="True">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter x:Name="Content" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Bd">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFEAF6FD" Offset="0.15"/>
+                                            <GradientStop Color="#FFD9F0FC" Offset="0.5"/>
+                                            <GradientStop Color="#FFBEE6FD" Offset="0.5"/>
+                                            <GradientStop Color="#FFA7D9F5" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="1"/>
+                                <Setter Property="Background" TargetName="Bd" Value="#FF3399FF"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="False"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF3C7FB1"/>
+                            </MultiTrigger>
+                            <Trigger Property="TabStripPlacement" Value="Bottom">
+                                <Setter Property="BorderThickness" TargetName="Bd" Value="1,0,1,1"/>
+                            </Trigger>
+                            <Trigger Property="TabStripPlacement" Value="Left">
+                                <Setter Property="BorderThickness" TargetName="Bd" Value="1,1,0,1"/>
+                            </Trigger>
+                            <Trigger Property="TabStripPlacement" Value="Right">
+                                <Setter Property="BorderThickness" TargetName="Bd" Value="0,1,1,1"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="TabStripPlacement" Value="Top"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-2,-2,-2,-1"/>
+                                <Setter Property="Margin" TargetName="Content" Value="0,0,0,1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="TabStripPlacement" Value="Bottom"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-2,-1,-2,-2"/>
+                                <Setter Property="Margin" TargetName="Content" Value="0,1,0,0"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="TabStripPlacement" Value="Left"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-2,-2,-1,-2"/>
+                                <Setter Property="Margin" TargetName="Content" Value="0,0,1,0"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="TabStripPlacement" Value="Right"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-1,-2,-2,-2"/>
+                                <Setter Property="Margin" TargetName="Content" Value="1,0,0,0"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="Bd" Value="#FF3399FF"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FFC9C7BA"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="CamColorBrush" Color="White"/>
+
+        <ControlTemplate x:Key="UserToolButtonStyle" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1">
+                <StackPanel  Orientation="Horizontal"  MinHeight="30" >
+                <Canvas  Height="55" Width="55" Margin="4,13,0,0">
+                    <Path x:Name="Ellip2" Fill="{Binding Background, ElementName=Pane1}"  Data=" M 18.22 0.00 L 21.78 0.00 C 23.41 0.67 25.14 0.99 26.88 1.24 C 34.68 3.93 40.06 11.83 40.00 20.11 L 40.00 20.20 C 40.05 30.51 31.18 39.79 20.84 40.00 L 18.82 40.00 C 8.55 39.49 -0.12 30.20 0.00 19.92 L 0.00 19.40 C 0.24 9.49 8.56 1.14 18.22 0.00 Z" Height="45" Stretch="Fill" Width="45" />
+                    <Path Fill="{Binding Foreground, ElementName=Pane1}"   Data=" M 98 243 c-20 -23 -21 -73 -3 -124 14 -38 14 -39 -14 -54 -33 -16 -40 -11 -60 40 l-11 30 6 -30 c13 -68 98 -116 171 -96 36 10 93 56 93 75 0 5 -8 1 -17 -11 -14 -17 -21 -19 -45 -11 -26 9 -28 14 -22 42 17 81 16 117 -1 137 -23 24 -77 25 -97 2z " Stretch="Fill" Width="43.917" Height="39.584" Canvas.Top="6" RenderTransformOrigin="0.5,0.5" Canvas.Left="0.041" >
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                </Canvas>
+                    <ContentPresenter x:Name="CntPr" Content="{TemplateBinding Content}"/>
+            </StackPanel>
+            </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="CamToolButtonStyle" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1" FontSize="24">
+                <StackPanel  Orientation="Horizontal"  MinHeight="80" >
+                    <Viewbox Height="55" Width="55" >
+                <Canvas  Height="500" Width="500">
+                    <Path x:Name="ppa" Fill="{Binding Path=CamFillColor}" Data="M395.195,67.805C351.471,24.08,293.336,0,231.5,0S111.529,24.08,67.805,67.805S0,169.664,0,231.5
+		s24.08,119.971,67.805,163.695S169.664,463,231.5,463s119.971-24.08,163.695-67.805S463,293.336,463,231.5
+		S438.92,111.529,395.195,67.805z M384.589,384.589C343.697,425.48,289.329,448,231.5,448s-112.197-22.52-153.089-63.411
+		C37.52,343.697,15,289.329,15,231.5S37.52,119.303,78.411,78.411C119.303,37.52,173.671,15,231.5,15s112.197,22.52,153.089,63.411
+		C425.48,119.303,448,173.671,448,231.5S425.48,343.697,384.589,384.589z"/>
+	<Path Fill="{Binding Fill, ElementName=ppa}" Data="M231.5,64C139.14,64,64,139.14,64,231.5S139.14,399,231.5,399S399,323.86,399,231.5S323.86,64,231.5,64z M231.5,384
+		C147.411,384,79,315.589,79,231.5S147.411,79,231.5,79S384,147.411,384,231.5S315.589,384,231.5,384z"/>
+	<Path Fill="{Binding Fill, ElementName=ppa}" Data="M231.5,88C152.374,88,88,152.374,88,231.5S152.374,375,231.5,375S375,310.626,375,231.5S310.626,88,231.5,88z M231.5,360
+		C160.645,360,103,302.355,103,231.5S160.645,103,231.5,103S360,160.645,360,231.5S302.355,360,231.5,360z"/>
+	<Path Fill="{Binding Fill, ElementName=ppa}" Data="M231.5,112C165.607,112,112,165.607,112,231.5S165.607,351,231.5,351S351,297.393,351,231.5S297.393,112,231.5,112z
+		 M231.5,336C173.878,336,127,289.122,127,231.5S173.878,127,231.5,127S336,173.878,336,231.5S289.122,336,231.5,336z"/>
+	<Path Fill="{Binding Fill, ElementName=ppa}" Data="M231.5,176c-30.603,0-55.5,24.897-55.5,55.5s24.897,55.5,55.5,55.5s55.5-24.897,55.5-55.5S262.103,176,231.5,176z
+		 M231.5,272c-22.332,0-40.5-18.168-40.5-40.5s18.168-40.5,40.5-40.5s40.5,18.168,40.5,40.5S253.832,272,231.5,272z"/>
+	<Path Fill="{Binding Fill, ElementName=ppa}" Data="M157.75,62.373C181.107,52.172,205.92,47,231.5,47s50.393,5.172,73.75,15.373c0.977,0.427,1.995,0.629,2.998,0.629
+		c2.891,0,5.646-1.682,6.877-4.5c1.658-3.796-0.075-8.217-3.872-9.875C285.991,37.594,259.158,32,231.5,32
+		s-54.491,5.594-79.753,16.627c-3.796,1.658-5.529,6.079-3.872,9.875C149.533,62.298,153.955,64.031,157.75,62.373z"/>
+	<Path Fill="{Binding Fill, ElementName=ppa}" Data="M305.25,400.627c-18.56,8.105-38.198,13.064-58.368,14.738c-4.128,0.342-7.197,3.966-6.854,8.094
+		c0.325,3.917,3.604,6.88,7.466,6.88c0.208,0,0.417-0.009,0.628-0.026c21.817-1.81,43.057-7.173,63.131-15.94
+		c3.796-1.658,5.529-6.079,3.872-9.875C313.467,400.702,309.043,398.97,305.25,400.627z"/>
+	<Path Fill="{Binding Fill, ElementName=ppa}" Data="M216.118,415.365c-20.17-1.674-39.808-6.632-58.368-14.738c-3.795-1.659-8.217,0.075-9.875,3.872
+		c-1.658,3.796,0.075,8.217,3.872,9.875c20.074,8.767,41.314,14.13,63.131,15.94c0.211,0.018,0.42,0.026,0.628,0.026
+		c3.861,0,7.141-2.963,7.466-6.88C223.315,419.331,220.246,415.707,216.118,415.365z"/>
+
+                    <!--
+                    <Path x:Name="Ellip2" Fill="{Binding Background, ElementName=Pane1}"  Data=" M 18.22 0.00 L 21.78 0.00 C 23.41 0.67 25.14 0.99 26.88 1.24 C 34.68 3.93 40.06 11.83 40.00 20.11 L 40.00 20.20 C 40.05 30.51 31.18 39.79 20.84 40.00 L 18.82 40.00 C 8.55 39.49 -0.12 30.20 0.00 19.92 L 0.00 19.40 C 0.24 9.49 8.56 1.14 18.22 0.00 Z" Height="30" Stretch="Fill" Width="30" />
+                    <Path Fill="{Binding Foreground, ElementName=Pane1}"   Data=" M 98 243 c-20 -23 -21 -73 -3 -124 14 -38 14 -39 -14 -54 -33 -16 -40 -11 -60 40 l-11 30 6 -30 c13 -68 98 -116 171 -96 36 10 93 56 93 75 0 5 -8 1 -17 -11 -14 -17 -21 -19 -45 -11 -26 9 -28 14 -22 42 17 81 16 117 -1 137 -23 24 -77 25 -97 2z " Stretch="Fill" Width="27.25" Height="24.029" Canvas.Top="6.221" RenderTransformOrigin="0.5,0.5" Canvas.Left="0.5" >
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>-->
+                </Canvas>
+                        </Viewbox>
+                    <ContentPresenter x:Name="CntPr" Content="{TemplateBinding Content}"/>
+            </StackPanel>
+            </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="CatalogsToolButtonStyle" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1">
+                <StackPanel  Orientation="Horizontal"  MinHeight="80" Margin="10,0,0,0" >
+                    <Viewbox Height="55" Width="55">
+                <Canvas  Height="240" Width="246" >
+                    <Path x:Name="ppa" Fill="White" Data="m42.735,50.071h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.934h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6z"/>
+    <Path Fill="{Binding Fill, ElementName=ppa}" Data="m42.735,62.071h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+    <Path Fill="{Binding Fill, ElementName=ppa}" Data="m42.735,88.005h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+    <Path Fill="{Binding Fill, ElementName=ppa}" Data="m42.735,113.94h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+    <Path Fill="{Binding Fill, ElementName=ppa}" Data="m42.735,139.875h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+    <Path Fill="{Binding Fill, ElementName=ppa}" Data="m237.783,98.361c0-1.591-0.632-3.117-1.757-4.243l-16.356-16.355c-1.125-1.125-2.651-1.757-4.243-1.757s-3.117,0.632-4.243,1.757l-28.756,28.756v-88.117c0-3.313-2.686-6-6-6h-170.428c-3.314,0-6,2.687-6,6v200.979c0,3.313 2.686,6 6,6h170.429c3.314,0 6-2.687 6-6v-63.18l53.597-53.597c1.125-1.125 1.757-2.651 1.757-4.243zm-225.783,115.02v-188.979h158.429v94.117l-35.291,35.291h-92.403c-3.313,0-6,2.687-6,6s2.687,6 6,6h80.403l-1.033,1.033c-0.777,0.777-1.326,1.753-1.586,2.821l-4.157,17.05h-25.148c-3.313,0-6,2.687-6,6s2.687,6 6,6c0,0 29.714,0 29.86,0 0.473,0 0.95-0.056 1.421-0.171l21.629-5.273c1.068-0.26 2.044-0.809 2.821-1.586l23.482-23.482v45.181h-158.427zm127.649-31.374l-10.408,2.538 2.538-10.408 83.648-83.648 7.871,7.871-83.649,83.647z"/>
+
+                        <!--  
+                    <Path Data="M1894 5099 c-22 -10 -216 -131 -430 -268 -473 -304 -525 -337 -686
+                        -436 -181 -112 -244 -175 -312 -312 -75 -150 -70 -59 -71 -1488 -1 -704 3
+                        -1302 7 -1330 27 -157 163 -303 353 -380 74 -29 96 -36 210 -60 181 -40 417
+                        -37 585 6 127 32 188 79 210 158 5 22 11 458 13 1101 3 951 5 1074 20 1148 47
+                        231 126 362 296 491 42 32 276 191 521 353 245 163 457 306 472 319 63 57 85
+                        163 50 242 -46 103 -153 146 -255 103 -18 -7 -179 -110 -357 -228 -517 -342
+                        -798 -526 -900 -591 -52 -33 -126 -80 -165 -105 -222 -145 -469 -230 -575
+                        -197 -58 18 -90 75 -90 164 0 57 32 145 68 184 9 10 120 83 247 162 126 80
+                        331 209 455 288 l225 144 20 -33 c64 -105 208 -123 298 -36 57 54 62 79 61
+                        282 -1 206 -8 236 -66 285 -61 51 -136 64 -204 34z" Height="17.897" RenderTransformOrigin="0.5,0.5" Stretch="Fill" Width="14.656" Fill="White" Canvas.Left="3.5" Canvas.Top="4.25">
+                  	<Path.RenderTransform>
+                  		<TransformGroup>
+                  			<ScaleTransform ScaleY="-1"/>
+                  			<SkewTransform/>
+                  			<RotateTransform/>
+                  			<TranslateTransform/>
+                  		</TransformGroup>
+                  	</Path.RenderTransform>
+                  </Path>
+                    
+                  <Path Data="M3451 4393 c-52 -28 -380 -250 -771 -523 -8 -6 -102 -71 -209 -145
+                    -247 -172 -292 -209 -363 -295 -43 -53 -106 -168 -113 -207 -2 -16 -9 -43 -15
+                    -62 -15 -51 -14 -2593 1 -2662 73 -341 546 -560 1025 -475 104 19 198 61 329
+                    149 76 51 660 482 714 527 10 8 33 26 51 40 404 309 540 414 564 437 64 62 60
+                    -32 61 1403 1 1050 -1 1314 -11 1350 -16 55 -53 96 -108 121 -51 23 -94 24
+                    -147 3 -32 -13 -229 -157 -339 -247 -38 -31 -422 -324 -575 -439 -93 -69 -174
+                    -131 -180 -135 -42 -37 -291 -208 -348 -240 -158 -87 -306 -133 -437 -135 -65
+                    -1 -86 3 -126 23 -64 33 -85 71 -86 153 -1 77 22 129 85 188 45 42 896 638
+                    911 638 3 0 12 -13 21 -30 8 -16 36 -41 61 -56 74 -44 165 -34 230 23 22 19
+                    56 76 61 103 8 41 2 345 -7 379 -6 22 -27 57 -48 78 -66 68 -145 80 -231 36z
+                    m880 -1603 c1 -152 -2 -195 -13 -201 -13 -7 -503 -387 -562 -435 -16 -13 -43
+                    -34 -59 -46 -17 -13 -101 -78 -186 -144 -86 -67 -157 -120 -159 -119 -2 2 -3
+                    90 -3 196 1 192 1 194 24 211 13 10 232 180 487 378 255 198 465 358 467 357
+                    1 -2 3 -91 4 -197z" Height="17.897" RenderTransformOrigin="0.5,0.5" Stretch="Fill" Canvas.Top="7.425" Canvas.Left="12.007" Width="14.656" Fill="White">
+	                    <Path.RenderTransform>
+		                    <TransformGroup>
+			                    <ScaleTransform ScaleY="-1"/>
+			                    <SkewTransform/>
+			                    <RotateTransform/>
+			                    <TranslateTransform/>
+		                    </TransformGroup>
+	                    </Path.RenderTransform>
+                    </Path>
+                    -->
+                </Canvas>
+                        </Viewbox>
+                <TextBlock x:Name="Text1" UseLayoutRounding="False" Margin="15,0,0,0" Height="70" TextWrapping="Wrap" Text="Начать агрегацию" FontSize="24" RenderTransformOrigin="0.5,0.5" Width="152.847" />
+            </StackPanel>
+                </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="#FF282828" />
+                    <Setter TargetName="ppa" Property="Fill" Value="Gray" />
+                    <Setter TargetName="Text1" Property="Foreground" Value="Gray" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="SettingsToolButtonStyle" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1">
+                <StackPanel  Orientation="Horizontal"  MinHeight="30" >
+                <Canvas  Height="30" Width="30" Margin="4,0,0,0">
+                    <Path Data="M 293.629,127.806l-5.795-13.739c19.846-44.856,18.53-46.189,14.676-50.08l-25.353-24.77l-2.516-2.12h-2.937
+				c-1.549,0-6.173,0-44.712,17.48l-14.184-5.719c-18.332-45.444-20.212-45.444-25.58-45.444h-35.765
+				c-5.362,0-7.446-0.006-24.448,45.606l-14.123,5.734C86.848,43.757,71.574,38.19,67.452,38.19l-3.381,0.105L36.801,65.032
+				c-4.138,3.891-5.582,5.263,15.402,49.425l-5.774,13.691C0,146.097,0,147.838,0,153.33v35.068c0,5.501,0,7.44,46.585,24.127
+				l5.773,13.667c-19.843,44.832-18.51,46.178-14.655,50.032l25.353,24.8l2.522,2.168h2.951c1.525,0,6.092,0,44.685-17.516
+				l14.159,5.758c18.335,45.438,20.218,45.427,25.598,45.427h35.771c5.47,0,7.41,0,24.463-45.589l14.195-5.74
+				c26.014,11,41.253,16.585,45.349,16.585l3.404-0.096l27.479-26.901c3.909-3.945,5.278-5.309-15.589-49.288l5.734-13.702
+				c46.496-17.967,46.496-19.853,46.496-25.221v-35.029C340.268,146.361,340.268,144.434,293.629,127.806z M170.128,228.474
+				c-32.798,0-59.504-26.187-59.504-58.364c0-32.153,26.707-58.315,59.504-58.315c32.78,0,59.43,26.168,59.43,58.315
+				C229.552,202.287,202.902,228.474,170.128,228.474z" Height="20" Stretch="Fill" Width="20" Canvas.Left="4.73" Canvas.Top="4.73" Fill="White"/>
+                </Canvas>
+                <TextBlock x:Name="Text1" UseLayoutRounding="False" Margin="4,10,0,0" MinHeight="30" TextWrapping="Wrap" Text="Настройки" RenderTransformOrigin="0.5,0.5" />
+            </StackPanel>
+                </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="SettingsToolButtonStyleNew" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1">
+                <StackPanel  Orientation="Horizontal"  MinHeight="30" >
+                <Canvas  Height="80" Width="80" Margin="0,0,0,0">
+                    <Path Data="M 293.629,127.806l-5.795-13.739c19.846-44.856,18.53-46.189,14.676-50.08l-25.353-24.77l-2.516-2.12h-2.937
+				c-1.549,0-6.173,0-44.712,17.48l-14.184-5.719c-18.332-45.444-20.212-45.444-25.58-45.444h-35.765
+				c-5.362,0-7.446-0.006-24.448,45.606l-14.123,5.734C86.848,43.757,71.574,38.19,67.452,38.19l-3.381,0.105L36.801,65.032
+				c-4.138,3.891-5.582,5.263,15.402,49.425l-5.774,13.691C0,146.097,0,147.838,0,153.33v35.068c0,5.501,0,7.44,46.585,24.127
+				l5.773,13.667c-19.843,44.832-18.51,46.178-14.655,50.032l25.353,24.8l2.522,2.168h2.951c1.525,0,6.092,0,44.685-17.516
+				l14.159,5.758c18.335,45.438,20.218,45.427,25.598,45.427h35.771c5.47,0,7.41,0,24.463-45.589l14.195-5.74
+				c26.014,11,41.253,16.585,45.349,16.585l3.404-0.096l27.479-26.901c3.909-3.945,5.278-5.309-15.589-49.288l5.734-13.702
+				c46.496-17.967,46.496-19.853,46.496-25.221v-35.029C340.268,146.361,340.268,144.434,293.629,127.806z M170.128,228.474
+				c-32.798,0-59.504-26.187-59.504-58.364c0-32.153,26.707-58.315,59.504-58.315c32.78,0,59.43,26.168,59.43,58.315
+				C229.552,202.287,202.902,228.474,170.128,228.474z" Stretch="Fill" Fill="White" Height="45" Width="45" Margin="15,15,0,0"/>
+                </Canvas>
+                
+            </StackPanel>
+            </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="NotifyToolButtonStyle" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1">
+                <StackPanel  Orientation="Horizontal"  MinHeight="30" >
+                <Canvas  Height="30" Width="30" Margin="4,0,0,0">
+                            <Path Data="M 381.7,225.9c0-97.6-52.5-130.8-101.6-138.2c0-0.5,0.1-1,0.1-1.6c0-12.3-10.9-22.1-24.2-22.1c-13.3,0-23.8,9.8-23.8,22.1
+		                c0,0.6,0,1.1,0.1,1.6c-49.2,7.5-102,40.8-102,138.4c0,113.8-28.3,126-66.3,158h384C410.2,352,381.7,339.7,381.7,225.9z" Height="17.377" Stretch="Fill" Width="20" Canvas.Left="4.434" Canvas.Top="4.751" Fill="White"/>               
+	            <Path Data="M 256.2,448c26.8,0,48.8-19.9,51.7-43H204.5C207.3,428.1,229.4,448,256.2,448z" Height="2.891" Stretch="Fill" Width="6.62" Canvas.Left="11" Canvas.Top="24.028" Fill="White"/>
+
+                       </Canvas>
+                <TextBlock x:Name="Text1" UseLayoutRounding="False" Margin="4,10,0,0" MinHeight="30" TextWrapping="Wrap" Text="Уведомления" RenderTransformOrigin="0.5,0.5" />
+            </StackPanel>
+                </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="HomeToolButtonStyle" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1">
+                <StackPanel  Orientation="Horizontal"  MinHeight="80"  Margin="10,0,0,0">
+                     <Viewbox Height="55" Width="55" Margin="0,10,0,0">
+                        <Canvas  Height="230" Width="186" >
+                      <!--<Path x:Name="ppa" Height="30" Stretch="Fill" Width="30" Fill="White" Data="M324.6,106.8c17.5,0,32.4,6,44.9,18.1c12.4,12.1,18.7,26.9,18.7,44.4v252.1c0,17.5-6.2,32.4-18.7,44.9c-12.4,12.4-27.4,18.7-44.9,18.7H72.5c-17.5,0-32.3-6.2-44.4-18.7C16,453.8,10,438.8,10,421.4V169.3c0-17.5,6-32.3,18.1-44.4c12.1-12.1,26.9-18.1,44.4-18.1H324.6z M324.6,610.9c17.5,0,32.4,6.1,44.9,18.1c12.4,12.1,18.7,26.9,18.7,44.4v253.1c0,17.5-6.2,32.3-18.7,44.4C357,982.9,342,989,324.6,989H72.5c-17.5,0-32.3-6-44.4-18.1C16,958.7,10,944,10,926.5V673.4c0-17.5,6-32.3,18.1-44.4C40.2,617,55,610.9,72.5,610.9H324.6z M829.7,610.9c17.5,0,32.3,6.1,44.4,18.1c12.1,12.1,18.1,26.9,18.1,44.4v253.1c0,17.5-6,32.3-18.1,44.4S847.2,989,829.7,989H577.6c-17.5,0-32.4-6-44.9-18.1s-18.7-26.9-18.7-44.4V673.4c0-17.5,6.2-32.3,18.7-44.4c12.4-12.1,27.4-18.1,44.9-18.1H829.7z M969.8,217.7c13.4,13.4,20.2,29.2,20.2,47.4c0,18.1-6.7,33.6-20.2,46.4L782.3,499c-13.4,13.4-29.1,20.2-46.9,20.2c-17.8,0-33.4-6.7-46.9-20.2L501,311.5c-12.8-12.8-19.2-28.2-19.2-46.4c0-18.1,6.4-33.9,19.2-47.4L688.5,30.2C702,17.4,717.6,11,735.4,11c17.8,0,33.4,6.4,46.9,19.2L969.8,217.7z" />-->
+                        <Path x:Name="ppa" Fill="White" Data="m230.042,142.627c-1.871-2.744-5.612-3.452-8.355-1.581l-65.513,44.667-14.55-19.473c-1.526-2.036-4.241-2.977-6.788-2.129-3.185,1.06-4.908,4.501-3.848,7.686l11.908,35.785c0.45,1.33 1.184,2.645 2.18,3.757 3.94,4.401 10.702,4.776 15.104,0.836l.777-.695 68.129-60.985c2.216-1.981 2.676-5.346 0.956-7.868z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m120.211,190.676h-108.211v-162.49h158.43v124.823c0,3.313 2.687,6 6,6s6-2.687 6-6v-130.823c0-3.313-2.687-6-6-6h-170.43c-3.313,0-6,2.687-6,6v174.49c0,3.313 2.687,6 6,6h114.211c3.313,0 6-2.687 6-6 0-3.314-2.687-6-6-6z" Height="215" Stretch="Fill"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m139.694,53.855h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.313,0 6-2.687 6-6s-2.686-6-6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m139.694,79.79h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.313,0 6-2.687 6-6s-2.686-6-6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m139.694,105.725h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.313,0 6-2.687 6-6s-2.686-6-6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m145.694,137.659c0-3.313-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.314,0 6-2.686 6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="M42.735,156.329c-3.313,0-6,2.687-6,6s2.687,6,6,6h48.479c3.313,0,6-2.687,6-6s-2.687-6-6-6H42.735z"/>        
+                    </Canvas>
+                        </Viewbox>
+                <TextBlock x:Name="Text1" UseLayoutRounding="False" Margin="16,0,0,0" MinHeight="30" FontSize="24" TextWrapping="Wrap" Text="Завершить агрегацию" RenderTransformOrigin="0.5,0.5" Width="127.513" Height="71" />
+            </StackPanel>
+                </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="False">
+                    <!--<Setter Property="Background" Value="OrangeRed" />-->
+                    <Setter Property="Foreground" Value="#FF282828" />
+                    <Setter TargetName="ppa" Property="Fill" Value="Gray" />
+                    <!--<Setter TargetName="ppb" Property="Fill" Value="Gray" />-->
+                    <Setter TargetName="Text1" Property="Foreground" Value="Gray" />
+                    <!--<Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />-->
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="NewPalNumToolButtonStyle" TargetType="{x:Type Button}" >
+            <TextBlock x:Name="Pane1">
+                <StackPanel  Orientation="Horizontal"  MinHeight="80"  Margin="10,0,0,0">
+                     <Viewbox Height="55" Width="55" Margin="0,10,0,0">
+                        <Canvas  Height="230" Width="186" >
+                      <!--<Path x:Name="ppa" Height="30" Stretch="Fill" Width="30" Fill="White" Data="M324.6,106.8c17.5,0,32.4,6,44.9,18.1c12.4,12.1,18.7,26.9,18.7,44.4v252.1c0,17.5-6.2,32.4-18.7,44.9c-12.4,12.4-27.4,18.7-44.9,18.7H72.5c-17.5,0-32.3-6.2-44.4-18.7C16,453.8,10,438.8,10,421.4V169.3c0-17.5,6-32.3,18.1-44.4c12.1-12.1,26.9-18.1,44.4-18.1H324.6z M324.6,610.9c17.5,0,32.4,6.1,44.9,18.1c12.4,12.1,18.7,26.9,18.7,44.4v253.1c0,17.5-6.2,32.3-18.7,44.4C357,982.9,342,989,324.6,989H72.5c-17.5,0-32.3-6-44.4-18.1C16,958.7,10,944,10,926.5V673.4c0-17.5,6-32.3,18.1-44.4C40.2,617,55,610.9,72.5,610.9H324.6z M829.7,610.9c17.5,0,32.3,6.1,44.4,18.1c12.1,12.1,18.1,26.9,18.1,44.4v253.1c0,17.5-6,32.3-18.1,44.4S847.2,989,829.7,989H577.6c-17.5,0-32.4-6-44.9-18.1s-18.7-26.9-18.7-44.4V673.4c0-17.5,6.2-32.3,18.7-44.4c12.4-12.1,27.4-18.1,44.9-18.1H829.7z M969.8,217.7c13.4,13.4,20.2,29.2,20.2,47.4c0,18.1-6.7,33.6-20.2,46.4L782.3,499c-13.4,13.4-29.1,20.2-46.9,20.2c-17.8,0-33.4-6.7-46.9-20.2L501,311.5c-12.8-12.8-19.2-28.2-19.2-46.4c0-18.1,6.4-33.9,19.2-47.4L688.5,30.2C702,17.4,717.6,11,735.4,11c17.8,0,33.4,6.4,46.9,19.2L969.8,217.7z" />-->
+                        <Path x:Name="ppa" Fill="White" Data="m230.042,142.627c-1.871-2.744-5.612-3.452-8.355-1.581l-65.513,44.667-14.55-19.473c-1.526-2.036-4.241-2.977-6.788-2.129-3.185,1.06-4.908,4.501-3.848,7.686l11.908,35.785c0.45,1.33 1.184,2.645 2.18,3.757 3.94,4.401 10.702,4.776 15.104,0.836l.777-.695 68.129-60.985c2.216-1.981 2.676-5.346 0.956-7.868z"/>
+                        <!--<Path Fill="{Binding Fill, ElementName=ppa}" Data="m120.211,190.676h-108.211v-162.49h158.43v124.823c0,3.313 2.687,6 6,6s6-2.687 6-6v-130.823c0-3.313-2.687-6-6-6h-170.43c-3.313,0-6,2.687-6,6v174.49c0,3.313 2.687,6 6,6h114.211c3.313,0 6-2.687 6-6 0-3.314-2.687-6-6-6z" Height="215" Stretch="Fill"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m139.694,53.855h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.313,0 6-2.687 6-6s-2.686-6-6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m139.694,79.79h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.313,0 6-2.687 6-6s-2.686-6-6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m139.694,105.725h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.313,0 6-2.687 6-6s-2.686-6-6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="m145.694,137.659c0-3.313-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.687,6 6,6h96.959c3.314,0 6-2.686 6-6z"/>
+                        <Path Fill="{Binding Fill, ElementName=ppa}" Data="M42.735,156.329c-3.313,0-6,2.687-6,6s2.687,6,6,6h48.479c3.313,0,6-2.687,6-6s-2.687-6-6-6H42.735z"/>-->        
+                    </Canvas>
+                        </Viewbox>
+                <TextBlock x:Name="Text1" UseLayoutRounding="False" Margin="16,0,0,0" MinHeight="30" FontSize="24" TextWrapping="Wrap" Text="Запросить номера" RenderTransformOrigin="0.5,0.5" Width="127.513" Height="71" />
+            </StackPanel>
+                </TextBlock>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ObjectLightColor}" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="{StaticResource ObjectLightColor}" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="OrangeRed" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="False">
+                    <!--<Setter Property="Background" Value="OrangeRed" />-->
+                    <Setter Property="Foreground" Value="#FF282828" />
+                    <Setter TargetName="ppa" Property="Fill" Value="Gray" />
+                    <!--<Setter TargetName="ppb" Property="Fill" Value="Gray" />-->
+                    <Setter TargetName="Text1" Property="Foreground" Value="Gray" />
+                    <!--<Setter TargetName="Pane1" Property="Background" Value="OrangeRed" />-->
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </Window.Resources>
+    <Grid x:Name="grid"  >
+
+
+        <Grid x:Name="DeskTop" Grid.Row="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="81"/>
+                <RowDefinition Height="600*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" x:Name="ToolBar" BorderThickness="0,0,0,1" BorderBrush="Black" Height="81" VerticalAlignment="Top" >
+                <Grid x:Name="BannerGrid" Height="80" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" Background="#FF282828" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!---user-->
+                    <Button x:Name="BtnUserLogon"  Visibility="Visible" Margin="2,0,0,0" Grid.Column="0" Template="{DynamicResource UserToolButtonStyle}"  Width="210" Background="#373737" Foreground="white" Click="BtnUserLogon_Click"  HorizontalAlignment="Left"  >
+                        <TextBlock x:Name="userNameText1" UseLayoutRounding="False" MinHeight="0" Margin="10,10,0,0"
+                           TextWrapping="Wrap"  FontSize="24" Text="{Binding Path=Packer}" Width="113" Height="65" />
+                    </Button>
+                    <!--Camera-->
+                    <Button x:Name="BtnCamSate" Margin="170,0,0,0" Visibility="Hidden"  Template="{DynamicResource CamToolButtonStyle}"  Width="51"  Foreground="white" Click="BtnCamSate_Click" HorizontalAlignment="Left" >
+                        <TextBlock x:Name="camStateText1" UseLayoutRounding="False" Margin="4,20,0,0" MinHeight="0" 
+                           TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" FontSize="24" Text="{Binding Path=CamState}" />
+                    </Button>
+
+                    <!--кнопки-->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top" Width="694" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,50,0" Height="80" >
+
+                        <Button x:Name="BtnOrderStart" Template="{DynamicResource CatalogsToolButtonStyle}" Click="BtnOrderStart_Click" Width="240" Background="#373737" Foreground="white"/>
+                        <Button x:Name="BtnOrderClose"  Template="{DynamicResource HomeToolButtonStyle}" Click="BtnOrderClose_Click" IsEnabled="False" Width="240" Background="#373737" Foreground="white"/>
+                        <!--<Button x:Name="BtnNewPalNumbers"  Template="{DynamicResource NewPalNumToolButtonStyle}" Click="BtnNewPalNumbers_Click"  IsEnabled="True" Width="40" Background="#373737" Foreground="white"/>-->
+                        <TextBlock Width="92"  FontWeight="Bold" FontSize="34" Text="{Binding Path=CurTime}" VerticalAlignment="Center"  Margin="60,16,0,18" Foreground="White" />
+                        <Button x:Name="BtnSettings" Template="{DynamicResource SettingsToolButtonStyleNew}" Margin="0,0,0,0" Width="71" Background="#373737" Foreground="white" Click="BtnSettings_Click" />
+
+                        <!--<Button x:Name="BtnNotify"  Template="{DynamicResource NotifyToolButtonStyle}"  Width="10" Background="#373737" Foreground="white" Visibility="Hidden" />-->
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Frame x:Name="MainFrame" Grid.Row="2" NavigationUIVisibility="Hidden" d:IsHidden="False"/>
+            <StackPanel x:Name="WaitPanel" Grid.Row="2" Margin="25,10,25,0" VerticalAlignment="Center" Visibility="Collapsed">
+                <TextBlock  x:Name="CaptionQz"  Foreground="White" FontWeight="Bold" FontSize="23" Margin="0,10,0,0" HorizontalAlignment="Center" Text="Ожидание ответа сервера" Width="308" Height="52"/>
+                <Canvas  RenderTransformOrigin="0.5,0.5" Width="120" Height="120" x:Name="WaitCircle">
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="20.1696" Canvas.Top="9.76358" 
+                                Stretch="Fill" Fill="#E6FF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="2.86816" Canvas.Top="29.9581" 
+                                Stretch="Fill" Fill="#CDFF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="5.03758e-006" Canvas.Top="57.9341" 
+                                    Stretch="Fill" Fill="#B3FF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="12.1203" Canvas.Top="83.3163" 
+                                    Stretch="Fill" Fill="#9AFF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="36.5459" Canvas.Top="98.138" 
+                                    Stretch="Fill" Fill="#80FF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="64.6723" Canvas.Top="96.8411" 
+                                    Stretch="Fill" Fill="#67FF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="87.6176" Canvas.Top="81.2783" 
+                                    Stretch="Fill" Fill="#4DFF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="98.165" Canvas.Top="54.414" 
+                                    Stretch="Fill" Fill="#34FF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="92.9838" Canvas.Top="26.9938" 
+                                    Stretch="Fill" Fill="#1AFF4500"/>
+                    <Ellipse Width="21.835" Height="21.862" Canvas.Left="47.2783" Canvas.Top="0.5" 
+                                    Stretch="Fill" Fill="OrangeRed"/>
+                    <Canvas.RenderTransform>
+                        <RotateTransform x:Name="SpinnerRotate" Angle="0" />
+                    </Canvas.RenderTransform>
+                    <Canvas.Triggers>
+                        <EventTrigger RoutedEvent="ContentControl.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="SpinnerRotate" 
+                                             Storyboard.TargetProperty="(RotateTransform.Angle)" 
+                                            From="0" To="360" Duration="0:0:03" 
+                                            RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Canvas.Triggers>
+                </Canvas>
+                <StackPanel x:Name="BtnPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,10,10">
+                    <Button  x:Name="CancelSend" Click="CancelSend_Click"  Content="Отменить" Visibility="Hidden"
+                             FontSize="24" Height="86" VerticalAlignment="Bottom" Margin="10,0,0,0" Style="{DynamicResource ActionButtonStyle3}" HorizontalAlignment="Right" Width="200"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+        <Button x:Name="CloseApp" Click="btnExit_Click"  SnapsToDevicePixels="True" HorizontalAlignment="Right" Width="46.649" Height="40.02" VerticalAlignment="Top" Content="X" Style="{DynamicResource CloseButtonStyle}"/>
+
+    </Grid>
+</Window>

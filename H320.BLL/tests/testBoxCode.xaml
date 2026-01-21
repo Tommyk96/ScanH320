@@ -1,0 +1,21 @@
+﻿<Window x:Class="BoxAgr.tests.testBoxCode"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoxAgr.tests"
+        mc:Ignorable="d"
+        Title="testBoxCode" Height="300" Width="500">
+    <Grid >
+        <StackPanel Orientation="Vertical">
+            <Viewbox Height="200" Width="480">
+                <Canvas x:Name="canvas1"></Canvas>
+            </Viewbox>
+            <TextBlock x:Name="tbCode" FontSize="20" Margin="124,0,82,0">-</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <Button Height="50" Click="Button_Click_1"  Width="245">Скан</Button>
+                <Button Height="50" Click="Button_Click" Width="245">Выход</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

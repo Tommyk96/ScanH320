@@ -1,0 +1,342 @@
+﻿<Page 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ExtCtrl="clr-namespace:ControlsLegacy.Controls;assembly=ControlsLegacy"
+      xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="BoxAgr.Pages.SettingsPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="670" d:DesignWidth="980"
+      Title="SettingsPage" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Page.Resources>
+        <System:Double x:Key="TextFontSize">20</System:Double>
+        <System:Double x:Key="DescrTextFontSize">17</System:Double>
+    </Page.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="46"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="Back" Click="Back_Click" Style="{DynamicResource HomeButtonStyle}" Height="46" VerticalAlignment="Top" Margin="0,29,10,0" HorizontalAlignment="Right" Width="46" RenderTransformOrigin="0.478,1.045" Visibility="Hidden" Grid.RowSpan="2"/>
+        <TextBlock Grid.Row="0" x:Name="CaptionST1" VerticalAlignment="Bottom" Height="32" Foreground="White" Cursor="" Width="213" HorizontalAlignment="Left" Margin="10,0,0,10" Text="Настройки" FontSize="24" />
+        <Border x:Name="SettingsBorder"  BorderBrush="White" BorderThickness="0,0,0,0" Margin="10,0,10,10" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="380*"/>
+                    <ColumnDefinition Width="380*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="100*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+                        <Border  BorderBrush="#FF373737" BorderThickness="0,0,0,0" Margin="0,0,0,0" Visibility="Collapsed">
+                            <Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,0,0,0" Background="#FF282828">
+                                <Grid Height="130" Margin="10,10,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="70"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Настройки агрегации " FontWeight="Bold" Foreground="White"  FontFamily="Arial" FontSize="{DynamicResource TextFontSize}"/>
+
+                                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2"  Text="Количество оставшихся номеров коробов, после которого будет сделан запрос на получение дополнительных номеров."  Foreground="White" 
+                                               FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0" TextWrapping="Wrap"/>
+                                    <ExtCtrl:TouchEnabledTextBox   Grid.Row="2" Grid.Column="1" Text="{Binding MinBoxNumberBeforeWarning}" TextChanged="LayerFailCount_TextChanged"  x:Name="LayerFail"  Foreground="White" Background="#FF373737"
+                                       FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                                <GradientStop Color="#FFABADB3"/>
+                                                <GradientStop Color="#FFE2E3EA"/>
+                                                <GradientStop Color="#FF121212"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </ExtCtrl:TouchEnabledTextBox>
+                                    <TextBlock Visibility="Hidden" Grid.Row="2" Grid.Column="0" Text="Статус: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                    <TextBlock Visibility="Hidden" Grid.Row="2" Grid.Column="1" Text="{Binding PrinterStatus}" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border x:Name="blOneOperator"  BorderBrush="#FF373737" BorderThickness="0,0,0,0" Margin="0,0,0,0" >
+                            <Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,0,0,0" Background="#FF282828">
+                                <Grid  Margin="10,10,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="380"/>
+                                        <ColumnDefinition Width="80*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="65"/>
+                                        
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0"  Grid.ColumnSpan="2" Text="Настройки режима" FontWeight="Bold" Foreground="White"  FontFamily="Arial" FontSize="{DynamicResource TextFontSize}"/>
+
+
+                                    <TextBlock Grid.Row="1"   Text="Включить режим отображения сетки.
+                                               (после изменения необходимо перезапустить программу)"  Foreground="White" 
+                                               FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0" TextWrapping="Wrap"/>
+
+
+                                    <CheckBox Name="Checker3" Grid.Column="1" Grid.Row="1" Style="{DynamicResource SliderCheckBox}" IsChecked="{Binding Path=BoxGrid}"
+                                          Content="{Binding Path=BoxGridState, Mode=OneWay}" VerticalAlignment="Center" Cursor="Hand"
+                                              Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border  BorderBrush="#FF373737" BorderThickness="0,0,0,0" Margin="0,10,0,0" Visibility="{Binding Path=GridSettingsVisible, Mode=OneWay}" >
+                            <Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,0,0,0" Background="#FF282828">
+                                <!--<Grid Margin="10,10,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="260"/>
+                                        <ColumnDefinition Width="100*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="100"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0"  Grid.ColumnSpan="2" Text="Настройки сетки короба" FontWeight="Bold" Foreground="White"  FontFamily="Arial" FontSize="{DynamicResource TextFontSize}"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Кол-во по вертикали: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                    <ExtCtrl:TouchEnabledTextBox   Grid.Row="1" Grid.Column="1" Text="{Binding NumRows}"  TextChanged="serialPort232Name_TextChanged"  
+                                                                   Foreground="White" Background="#FF373737" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                                <GradientStop Color="#FFABADB3"/>
+                                                <GradientStop Color="#FFE2E3EA"/>
+                                                <GradientStop Color="#FF121212"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </ExtCtrl:TouchEnabledTextBox>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0"  Text="Кол-во по горизонтали: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                    <ExtCtrl:TouchEnabledTextBox   Grid.Row="2" Grid.Column="1" Text="{Binding NumColumns}"  TextChanged="serialPort232Name_TextChanged"  
+                                                                   Foreground="White" Background="#FF373737" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                                <GradientStop Color="#FFABADB3"/>
+                                                <GradientStop Color="#FFE2E3EA"/>
+                                                <GradientStop Color="#FF121212"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </ExtCtrl:TouchEnabledTextBox>
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0"  Text="Ширина короба в px:" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                    <ExtCtrl:TouchEnabledTextBox   Grid.Row="3" Grid.Column="1" Text="{Binding BoxWidth}"  TextChanged="serialPort232Name_TextChanged"  
+                                                                   Foreground="White" Background="#FF373737" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                                <GradientStop Color="#FFABADB3"/>
+                                                <GradientStop Color="#FFE2E3EA"/>
+                                                <GradientStop Color="#FF121212"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </ExtCtrl:TouchEnabledTextBox>
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0"  Text="Высота кроба в px: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                    <ExtCtrl:TouchEnabledTextBox   Grid.Row="4" Grid.Column="1" Text="{Binding BoxHeight}"  TextChanged="serialPort232Name_TextChanged"  
+                                                                   Foreground="White" Background="#FF373737" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                                <GradientStop Color="#FFABADB3"/>
+                                                <GradientStop Color="#FFE2E3EA"/>
+                                                <GradientStop Color="#FF121212"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </ExtCtrl:TouchEnabledTextBox>-->
+
+                                    <Button x:Name="btnSelectBox"  Grid.Row="5" Grid.ColumnSpan="2" Click="btnSelectBox_Click"  HorizontalAlignment="Right" Width="400" Margin="10,10,10,10" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Настройка режимов работы" Style="{DynamicResource ActionButtonStyle3}"/>
+
+                                <!--</Grid>-->
+                            </Border>
+                        </Border>
+
+                        <!--<Border BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,10,0,0" Background="#FF282828" Height="103">
+                            <StackPanel Orientation="Horizontal" Visibility="Hidden">
+                            </StackPanel>
+                        </Border>-->
+                       
+                        <TextBlock Grid.Row="1" Grid.Column="0"  Text="{Binding Version}" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                    </StackPanel>
+
+                   
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <StackPanel Orientation="Vertical">
+                        <Border  BorderBrush="#FF373737" BorderThickness="0,0,0,0" Margin="0,0,0,0">
+                            <Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,0,0,0" Background="#FF282828">
+                                <Grid Height="60" Margin="10,10,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="100*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Принтер " FontWeight="Bold" Foreground="White"  FontFamily="Arial" FontSize="{DynamicResource TextFontSize}"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="IP: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                    <ExtCtrl:TouchEnabledTextBox   Grid.Row="1" Grid.Column="1" Text="{Binding PrinterPort}" TextChanged="printerPort_TextChanged"  x:Name="printerPort"  Foreground="White" Background="#FF373737"
+                                       FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                        <TextBox.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                                <GradientStop Color="#FFABADB3"/>
+                                                <GradientStop Color="#FFE2E3EA"/>
+                                                <GradientStop Color="#FF121212"/>
+                                            </LinearGradientBrush>
+                                        </TextBox.BorderBrush>
+                                    </ExtCtrl:TouchEnabledTextBox>
+                                    <TextBlock Visibility="Hidden" Grid.Row="2" Grid.Column="0" Text="Статус: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                    <TextBlock Visibility="Hidden" Grid.Row="2" Grid.Column="1" Text="{Binding PrinterStatus}" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,10,0,0" Background="#FF282828">
+                            <Grid Height="60" Margin="10,10,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="160"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="160*"/>
+                                   </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Сканер ТСР" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>
+                                <!--
+                                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="IP: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                <TextBox   Grid.Row="1" Grid.Column="1" Text="{Binding CameraPort}" TextChanged="cameraPort_TextChanged"  x:Name="cameraPort"  Foreground="White" Background="#FF373737"
+                                       FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                    <TextBox.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                            <GradientStop Color="#FFABADB3"/>
+                                            <GradientStop Color="#FFE2E3EA"/>
+                                            <GradientStop Color="#FF121212"/>
+                                        </LinearGradientBrush>
+                                    </TextBox.BorderBrush>
+                                </TextBox>-->
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Статус: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="2,0,0,0"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CameraStatus}" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                                
+                                <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Text="Modbus" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="Статус: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="2,0,0,0"/>
+                                <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding PlcStatus}" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,10,0,0" Background="#FF282828">
+                            <Grid Height="60" Margin="10,10,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="100*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Ручной сканер" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0"  Text="Порт: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                <ExtCtrl:TouchEnabledTextBox   Grid.Row="1" Grid.Column="1" Text="{Binding HandSerialPort232Name}" TextChanged="serialPort232Name_TextChanged"  x:Name="serialPort232Name"  Foreground="White" Background="#FF373737"
+                                       FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                    <TextBox.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                            <GradientStop Color="#FFABADB3"/>
+                                            <GradientStop Color="#FFE2E3EA"/>
+                                            <GradientStop Color="#FF121212"/>
+                                        </LinearGradientBrush>
+                                    </TextBox.BorderBrush>
+                                </ExtCtrl:TouchEnabledTextBox>
+                                <TextBlock Visibility="Hidden" Grid.Row="2" Grid.Column="0" Text="Статус: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                <TextBlock Visibility="Hidden"  Grid.Row="2" Grid.Column="1" Text="{Binding StatusSerialPort232Name}" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                            </Grid>
+                        </Border>
+
+                        <!--<Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,10,0,0" Background="#FF282828">
+                            <Grid Height="60" Margin="10,10,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="100*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Сканер Правый " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0"  Text="Порт: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                <ExtCtrl:TouchEnabledTextBox   Grid.Row="1" Grid.Column="1" Text="{Binding HandSerialPort232Name}" TextChanged="handSerialPort232Name_TextChanged"  x:Name="handSerialPort232Name"  Foreground="White" Background="#FF373737"
+                                       FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial"  >
+                                    <TextBox.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                            <GradientStop Color="#FFABADB3"/>
+                                            <GradientStop Color="#FFE2E3EA"/>
+                                            <GradientStop Color="#FF121212"/>
+                                        </LinearGradientBrush>
+                                    </TextBox.BorderBrush>
+                                </ExtCtrl:TouchEnabledTextBox>
+                                <TextBlock Visibility="Hidden" Grid.Row="2" Grid.Column="0" Text="Статус: " FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" Margin="20,0,0,0"/>
+                                <TextBlock Visibility="Hidden" Grid.Row="2" Grid.Column="1" Text="{Binding StatusHandSerialPort232Name}" FontWeight="Bold" Foreground="White" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                            </Grid>
+                        </Border>-->
+
+                        <Border x:Name="blPallet" BorderBrush="#FF373737" BorderThickness="0,0,0,0" Margin="0,10,0,0" >
+                            <Border  BorderBrush="Black" BorderThickness="1,1,1,1" Margin="0,0,0,0" Background="#FF282828">
+                                <Grid Grid.Row="3" Grid.Column="0" Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition MinWidth="100"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0"  Grid.ColumnSpan="2" Text="Настройки режима формирования палеты " FontWeight="Bold" Foreground="White"  FontFamily="Arial" FontSize="{DynamicResource TextFontSize}"/>
+
+                                    <TextBlock  Foreground="White" Grid.Column="0" Grid.Row="1"  Margin="20,0,0,0"  Text="Автоматически формировать палету если достигнут максимум коробов для палеты" TextWrapping="Wrap"
+                                            FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" VerticalAlignment="Center"/>
+                                    <CheckBox Name="Checker1" Grid.Column="1" Grid.Row="1" Style="{DynamicResource SliderCheckBox}" IsChecked="{Binding Path=PalletAutoCreate}"
+                                          Content="{Binding Path=PalletAutoCreateState, Mode=OneWay}" VerticalAlignment="Center" Cursor="Hand" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial"/>
+
+                                    <TextBlock  Foreground="White" Grid.Row="2" Margin="20,0,0,0"  Text="Останавливать линию если достигнут максимум коробов для палеты" TextWrapping="Wrap"
+                                            FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial" VerticalAlignment="Center"/>
+                                    <CheckBox Name="Checker2" Grid.Row="2" Grid.Column="1" Style="{DynamicResource SliderCheckBox}" IsChecked="{Binding Path=StopLineAfterPalletFull}"
+                                          Content="{Binding Path=StopLineAfterPalletFullState, Mode=OneWay}" VerticalAlignment="Center" Cursor="Hand" Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+                        
+
+                    </StackPanel>
+                </Grid>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Right" >
+                    <Button x:Name="btnPrintTest"  Click="btnPrintTest_Click"  HorizontalAlignment="Right" Width="300" Margin="0,0,20,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Тест печати" Style="{DynamicResource ActionButtonStyle3}"/>
+                    <Button x:Name="btnShutdown"  Click="btnShutdown_Click"  HorizontalAlignment="Right" Width="300" Margin="0,0,20,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Выключить комплекс" Style="{DynamicResource ActionButtonStyle3}"/>
+                    <Button x:Name="btnBack"  Click="Back_Click"  HorizontalAlignment="Right" Width="300" Margin="0,0,0,0" Height="86" FontSize="24" VerticalAlignment="Bottom"   Content="Вернутся" Style="{DynamicResource ActionButtonStyle3}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

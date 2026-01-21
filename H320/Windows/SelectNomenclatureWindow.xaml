@@ -1,0 +1,90 @@
+﻿<Window x:Class="BoxAgr.Windows.SelectNomenclatureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:BoxAgr.Windows"     
+        mc:Ignorable="d"
+        Title="SelectNomenclatureWindow"  MaxHeight="800" Width="800" WindowStyle="None" 
+        MouseDown="Window_MouseDown" Background="#FF1F1F1F"
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <System:Double x:Key="TextFontSize">20</System:Double>
+        <System:Double x:Key="DescrTextFontSize">17</System:Double>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#FF282828"></Border>
+        <TextBlock Grid.ColumnSpan="2" Text="Настройка режима работы для продуктов" FontSize="24"   HorizontalAlignment="Center" Foreground="White"/>
+
+        <!--#region Справочник -->
+        <ListView Grid.Row="1"  Margin="0,0,0,0" x:Name="lvNomenclatureList" Background="{x:Null}"  ItemContainerStyle="{StaticResource ListViewItemMatrix}"
+                  Visibility="Visible"  SelectionChanged="lvNomenclatureList_SelectionChanged">
+            <ListView.View>
+                <GridView  ColumnHeaderContainerStyle="{DynamicResource GridViewColumnHeaderStyle2}" >
+
+                    <GridViewColumn  Width="200"  >
+                        <GridViewColumnHeader Tag="Name" Click="GridViewColumnHeader_Click">Наименование</GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label    Foreground="{StaticResource TextColor}"  Background="Transparent" FontSize="{DynamicResource LabelFontSize}">
+                                    <Label.Content>
+                                        <AccessText TextWrapping="Wrap" Text="{Binding Name}"/>
+                                    </Label.Content>
+                                </Label>
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Width="180" >
+                        <GridViewColumnHeader Tag="Gtin"  Click="GridViewColumnHeader_Click">GTIN</GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label  Background="Transparent"  Content="{Binding GTIN}" Foreground="{StaticResource TextColor}" FontSize="{DynamicResource LabelFontSize}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn  Width="160" >
+                        <GridViewColumnHeader Tag="BoxHeight"  Click="GridViewColumnHeader_Click">Отображать картинку</GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <!--<Label  Background="Transparent"  Content="{Binding BoxHeight}" Foreground="{StaticResource TextColor}" FontSize="{DynamicResource LabelFontSize}"/>-->
+                                <CheckBox Style="{DynamicResource SliderCheckBox}"
+                                          IsChecked="{Binding Path=BoxGrid}" Margin="40,0,0,0"
+                                          Content="{Binding Path=BoxGridState, Mode=OneWay}" VerticalAlignment="Center" Cursor="Hand"
+                                          Foreground="White" FontSize="{DynamicResource DescrTextFontSize}"  FontFamily="Arial"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn  Width="50" >
+                        <GridViewColumnHeader x:Name="DelCol"></GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  x:Name="DeleteRow"  Width="50" Click="DeleteRow_Click"  Style="{DynamicResource DeleteRowButtonStyle}" Margin="0,0,0,0" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button x:Name="btnAdd"  Click="btnAdd_Click"  Width="200" Margin="5,0,0,0" Height="86" 
+                    FontSize="24" VerticalAlignment="Bottom"   Content="Добавить" Style="{DynamicResource ActionButtonStyle3}" />
+            <Button x:Name="btnSelectNomenclature"  Click="btnSelectNomenclature_Click"  Width="200" Margin="5,0,0,0" Height="86" 
+                    FontSize="24" VerticalAlignment="Bottom"   Content="Ok" Style="{DynamicResource ActionButtonStyle3}" />
+            <Button x:Name="btnCancelSelect"  Click="btnCancelSelect_Click"  Width="200" Margin="5,0,0,0" Height="86" 
+                    FontSize="24" VerticalAlignment="Bottom"   Content="Отмена" Style="{DynamicResource ActionButtonStyle3}" />
+        </StackPanel>
+    </Grid>
+</Window>

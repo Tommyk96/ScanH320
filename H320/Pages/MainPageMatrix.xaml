@@ -1,0 +1,230 @@
+﻿<Page x:Class="BoxAgr.Pages.MainPageMatrix"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BoxAgr.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="680" d:DesignWidth="1010" MinHeight="680" MinWidth="1010"
+      Title="MainPageMatrix">
+    <!--<Page.Resources>
+        <Style x:Key="AlarmIcon" TargetType="{x:Type Viewbox}">
+            <ContentElement.
+        </Style>
+    </Page.Resources>-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600*"/>
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="81"/>
+            <RowDefinition Height="570*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2"  Height="80" VerticalAlignment="Top" Orientation="Horizontal" Background="{Binding Path=StatusBackground}" Margin="5,3,2,3">
+            <Viewbox MaxHeight="78"  Stretch="Uniform">
+                <TextBlock  x:Name="tbStatusText1" Foreground="White" MinHeight="78" Width="910" Margin="5,2,5,5"  TextWrapping="WrapWithOverflow" Text="{Binding Path=StatusText}" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center" />
+            </Viewbox>
+            <StackPanel Width="150">
+                <Viewbox Height="50" Width="60" Margin="0,0,0,5" Visibility="{Binding RightBoxAwaiVerifyVisiblility}">
+                    <Canvas  Height="245" Width="245">
+                        <Path Fill="#FFFFFF" Data="M112.959,48.944c1.499,0,3.036-0.595,4.182-1.768l20.334-20.873c2.252-2.3,2.192-5.991-0.108-8.237
+			c-2.332-2.258-6.031-2.22-8.249,0.104l-20.352,20.875c-2.254,2.3-2.188,5.987,0.112,8.233
+			C110.032,48.395,111.477,48.944,112.959,48.944z"/>
+                        <Path Fill="#FFFFFF" Data="M88.568,46.026c0.032,0,0.062,0,0.092,0c3.22-0.05,5.78-2.695,5.747-5.907l-0.369-29.132
+			c-0.06-3.224-2.725-5.708-5.917-5.763c-3.22,0.04-5.777,2.685-5.747,5.905l0.369,29.132
+			C82.795,43.458,85.372,46.026,88.568,46.026z"/>
+                        <Path Fill="#FFFFFF" Data="M61.43,52.156c1.138,1.116,2.591,1.663,4.067,1.663c1.515,0,3.02-0.593,4.182-1.768c2.254-2.3,2.192-5.987-0.11-8.233
+			l-20.864-20.34c-2.3-2.254-5.935-2.238-8.253,0.1c-2.234,2.3-2.188,5.991,0.126,8.237L61.43,52.156z"/>
+                        <Path Fill="#FFFFFF" Data="M243.483,93.542c-0.101-0.054-0.201,0.008-0.293-0.038c-0.817-1.349-2.107-2.411-3.771-2.733L90.106,61.607
+			c-1.102-0.229-2.128-0.126-3.125,0.258L6.223,91.603c-0.823,0.299-1.19,1.054-1.767,1.625c-0.808,0.21-1.685,0.07-2.331,0.6
+			C0.761,94.937,0,96.59,0,98.323v107.439c0,2.789,1.978,5.197,4.725,5.719l151.745,29.134c0.353,0.076,0.722,0.12,1.09,0.12
+			c0.112,0,0.196-0.093,0.276-0.093c0.129,0,0.229,0.093,0.337,0.093c0.657,0,1.318-0.12,1.976-0.337l81.948-29.13
+			c2.32-0.813,3.863-3.038,3.863-5.49V98.329C245.943,96.426,245.01,94.65,243.483,93.542z M89.454,73.369l131.315,25.655
+			l-19.58,6.953c-0.369-0.156-0.529-0.557-0.93-0.629L71.102,80.125L89.454,73.369z M157.483,121.506L26.81,96.426l23.227-8.552
+			l130.398,25.467L157.483,121.506z M151.709,227.827L11.625,200.949v-95.585l140.084,26.894V227.827z M234.298,201.654
+			l-70.286,24.999v-95.084l70.286-24.995V201.654z"/>
+               </Canvas>
+                </Viewbox>
+                <Viewbox Height="22" Width="150" Stretch="Uniform" >
+                    <TextBlock  Text="{Binding Path=LastCodeInLastBox}" Foreground="White" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="12" FontWeight="Bold" />
+                </Viewbox>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Viewbox x:Name="BoxMatrix"  Width="600"></Viewbox>
+            <Label Grid.Row="1" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="24" Content="{Binding Path=Diagnostic}"
+                   Margin="10,0"/>
+        </Grid>
+        <!--<Canvas x:Name="canvas" MouseMove="Canvas_MouseMove">
+
+            <Border Name="border1" Canvas.Left="123" Canvas.Top="35"
+                BorderBrush="DarkKhaki" BorderThickness="4"  CornerRadius="5" Padding="5"
+                Height="68" Width="68" MinHeight="10" MinWidth="10"
+                MouseLeftButtonDown="border_MouseLeftButtonDown"
+                MouseLeave="border_MouseLeave"
+                MouseEnter="border_MouseEnter">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="DarkGray"/>
+
+                </Border.BitmapEffect>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Rectangle x:Name="rect" Fill="DarkKhaki" RadiusX="5" RadiusY="5"/>
+
+            </Border>
+        </Canvas>-->
+
+        <!--<Viewbox Width="300" Height="300" Grid.RowSpan="2"   >
+            <Canvas Width="50" Height="50">
+
+                <Path Fill="White" Data="M 22.0 8.6 L 29 8.6 L 29 41.6 L 22.0 41.6 z">
+                    <Path.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <ColorAnimation                       
+                            Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)"
+                            From="DarkRed"
+                            To="Yellow"
+                            Duration="0:0:0.7"
+                            AutoReverse="True"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Path.Triggers>
+                </Path>
+                <Path Fill="#ee5f5b" Data="M 2422 4344 C 2350 4325 2286 4279 2245 4217 C 2189 4130 459 1129 432 1070 C 412 1028 406 999 406 948 C 406 819 498 693 619 658 C 687 639 4313 639 4381 658 C 4502 693 4594 819 4594 948 C 4594 999 4588 1028 4568 1070 C 4541 1129 2811 4130 2755 4217 C 2713 4280 2650 4325 2574 4345 C 2504 4363 2491 4363 2422 4344 z M 2595 3531 C 2651 3506 2713 3435 2729 3379 C 2740 3339 2736 3219 2701 2541 C 2672 1972 2656 1741 2646 1717 C 2594 1591 2406 1591 2354 1717 C 2344 1741 2328 1973 2299 2542 C 2261 3284 2259 3338 2274 3385 C 2292 3444 2347 3505 2405 3531 C 2457 3555 2543 3555 2595 3531 z M 2601 1440 C 2761 1359 2770 1143 2618 1043 C 2561 1005 2469 999 2406 1030 C 2264 1098 2227 1278 2333 1388 C 2409 1467 2508 1486 2601 1440 z">
+                    <Path.LayoutTransform>
+                        <RotateTransform Angle="180"  CenterY="25" CenterX="25" />
+                    </Path.LayoutTransform>
+                    <Path.RenderTransform>
+                        <ScaleTransform ScaleX="0.012" ScaleY="0.012"/>
+                    </Path.RenderTransform>
+                </Path>
+            </Canvas>
+        </Viewbox>-->
+        
+        <!--#region Left panel -->
+        <StackPanel Grid.Column="1" Grid.Row="1" Width="390" HorizontalAlignment="Right" VerticalAlignment="Stretch" 
+                    Margin="1"  Background="#FF2E2E2E">
+
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="8" Background="Transparent" Margin="7,0,5,0">
+                <Grid Height="260" Margin="9,0"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="8"/>
+                        <RowDefinition Height="21"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Path=ProductName}" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="22" 
+                               TextWrapping="WrapWithOverflow" Margin="10,5,0,0" Grid.Row="0" FontFamily="Arial"/>
+
+                    <StackPanel Grid.Row="1">
+                        <StackPanel  Orientation="Horizontal" >
+                            <TextBlock Text="Партия:"   Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                            <TextBlock Text="{Binding Path=PartNumber}" FontFamily="Arial" FontWeight="Bold" Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0"/>
+                            <Button Content="Gen" Click="btnTestGen_Click" Background="Red" Visibility="Collapsed" />
+                        </StackPanel>
+                        <StackPanel  Orientation="Horizontal" >
+                            <TextBlock Text="Собрано коробов:"   Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                            <TextBlock Text="{Binding Path=ReadyBoxCount}" FontFamily="Arial"  Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical"  Grid.Row="2" >
+                        <TextBlock Text="Короб №:"   FontFamily="Arial" Foreground="{DynamicResource TextColor}"  FontSize="{DynamicResource TextFontSize}" Margin="10,0,20,0"/>
+                        <TextBlock Text="{Binding Path=BoxNumber}" FontFamily="Arial" Foreground="{DynamicResource TextColor}" 
+                                   FontSize="{DynamicResource TextFontSize}" Margin="20,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal"  Margin="10,0,0,0">
+                        <TextBlock Text="Слой № "  Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}"  FontFamily="Arial" />
+                        <TextBlock Text="{Binding Path=LayerCount}" FontWeight="Bold" Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}" Margin="10,0,0,0" FontFamily="Arial"/>
+                        <TextBlock Text=" из " Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}" FontFamily="Arial"/>
+                        <TextBlock Text="{Binding Path=LayersCount}" FontWeight="Bold" Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}" FontFamily="Arial"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Orientation="Vertical" Height="72"> 
+                        <StackPanel Orientation="Horizontal"  Margin="10,0,0,0">
+                            <TextBlock Text="Распознано " Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}"/>
+                            <TextBlock Text="{Binding Path=ReadCodeCount}" FontWeight="Bold" Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="10,0,0,0">
+                            <TextBlock Text="Верифицировано " Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}"/>
+                            <TextBlock Text="{Binding Path=GoodLayerCodeCount}" FontWeight="Bold" Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="10,0,0,0">
+                            <TextBlock Text="Ожидалось " Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}"/>
+                            <TextBlock Text="{Binding Path=LayerCodeCount}" FontWeight="Bold" Foreground="{DynamicResource TextColor}" FontSize="{DynamicResource TextFontSize}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+
+                </Grid>
+            </Border>
+
+            <Grid Margin="20,0,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="btnHelp"  Click="btnHelp_Click"  HorizontalAlignment="Right" 
+                        Width="190" Margin="0,0,10,0" Height="75" FontSize="22" VerticalAlignment="Bottom"   Content="Справка" Style="{DynamicResource ActionButtonStyle3}"/>
+                <Button  Grid.Column="1" x:Name="btnCLoseBox"  Click="btnCLoseBox_Click"  HorizontalAlignment="Right" Width="180" 
+                        Height="75" FontSize="22" VerticalAlignment="Bottom"   Style="{DynamicResource ActionButtonStyle3}">
+                    <AccessText TextWrapping="WrapWithOverflow" Text="Закрыть      короб"/>
+                </Button>
+
+                <Button Grid.Row="1" x:Name="btnClear"  Click="btnClear_Click"  HorizontalAlignment="Right" Width="180"
+                        Margin="0,0,10,0" Height="75" FontSize="22" VerticalAlignment="Bottom"  
+                         Style="{DynamicResource ActionButtonStyle3}">
+                    <AccessText TextWrapping="WrapWithOverflow" Text="Очистить    короб"/>
+                </Button>
+                <Button  Grid.Row="1" Grid.Column="1" x:Name="btnBrack"  Click="btnBrack_Click" 
+                         HorizontalAlignment="Right" Width="180" Margin="0,0,0,0" Height="75" FontSize="22" VerticalAlignment="Bottom"   Content="Брак" Style="{DynamicResource ActionButtonStyle3}"/>
+                <Button  Grid.Row="2" x:Name="btnReprint"  Click="btnReprint_Click"  HorizontalAlignment="Right"
+                         Width="180" Margin="0,0,10,0" Height="75" FontSize="22" VerticalAlignment="Bottom"   Content="Перепечатать" Style="{DynamicResource ActionButtonStyle3}"/>
+                <!--<Button  Grid.Row="2" Grid.Column="1" x:Name="btnSample"  Click="btnSample_Click"  HorizontalAlignment="Right"
+                         Width="180" Margin="0,0,0,0" Height="75" FontSize="22" VerticalAlignment="Bottom"   Content="Образец" Style="{DynamicResource ActionButtonStyle3}"/>-->
+
+                <ToggleButton Grid.Row="2" Grid.Column="1" x:Name="btnRight"  Click="btnRight_Click"  HorizontalAlignment="Right" Width="180" 
+                              Margin="0,0,0,0" Height="75" FontSize="24" VerticalAlignment="Bottom"  IsEnabled="{Binding RightScanEnable}"
+                              Style="{DynamicResource ActionToggleButtonStyle3}">
+                    <AccessText TextWrapping="WrapWithOverflow" Text="Ручной       ввод"/>
+                </ToggleButton>
+
+                <!--<Button Grid.Row="3"  x:Name="btnStart"  Click="btnStart_Click"  HorizontalAlignment="Right" Width="180" Margin="0,0,10,0" Height="75" FontSize="24" VerticalAlignment="Bottom"   Content="Старт" Style="{DynamicResource ActionButtonStyle3}" />-->
+                <ToggleButton Grid.Row="3" Grid.Column="0" x:Name="btnStart"  Click="btnStart_Click" PreviewMouseDown="btnStart_PreviewMouseDown"   HorizontalAlignment="Right" Width="180"
+                              Margin="0,0,10,0" Height="75" FontSize="24" VerticalAlignment="Bottom" IsChecked="{Binding StopLineInverce}" 
+                              Content="Старт" Style="{DynamicResource ActionToggleButtonStart}"/>
+                
+                <ToggleButton Grid.Row="3" Grid.Column="1" x:Name="btnStop"  Click="btnStop_Click"  HorizontalAlignment="Right" Width="180"
+                              Margin="0,0,0,0" Height="75" FontSize="24" VerticalAlignment="Bottom" IsChecked="{Binding StopLine}" 
+                              Content="Стоп" Style="{DynamicResource ActionToggleButtonStyle3}"/>
+               
+
+            </Grid>
+        </StackPanel>
+        <!--#endregion-->
+    </Grid>
+    
+</Page>
